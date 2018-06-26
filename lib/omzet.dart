@@ -4,19 +4,14 @@ import 'dart:async';
 import 'dart:convert';
 
 class Omzet {
-  final int userId;
-
-  final int id;
-
-  final String title;
-
-  final String body;
+  final int month;
+  final double plan;
+  final double actual;
 
   Omzet({
-    this.userId,
-    this.id,
-    this.title,
-    this.body
+    this.month,
+    this.plan,
+    this.actual
   });
 
   static List<Omzet> fromJsonArray(String jsonArrayString){
@@ -24,22 +19,21 @@ class Omzet {
     List<Omzet> result = [];
     for(var i=0; i<data.length; i++){
       result.add(new Omzet(
-          userId: data[i]["userId"],
-          id: data[i]["id"],
-          title: data[i]["title"],
-          body: data[i]["body"]
+          month: data[i]["month"],
+          plan: data[i]["plan"],
+          actual: data[i]["actual"]
       ));
     }
     return result;
   }
 }
 
-class PostState{
+class OmzetState{
   List<Omzet> posts;
   bool loading;
   bool error;
 
-  PostState({
+  OmzetState({
     this.posts = const [],
     this.loading = true,
     this.error = false,
@@ -54,7 +48,7 @@ class PostState{
   Future<void> getFromApi() async{
     try {
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
+      var request = await httpClient.getUrl(Uri.parse('http://localhost:3000/api/omzets'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();
