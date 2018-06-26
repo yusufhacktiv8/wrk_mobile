@@ -23,6 +23,7 @@ class Omzet {
           plan: data[i]["plan"],
           actual: data[i]["actual"]
       ));
+//      print(data[i]["month"]);
     }
     return result;
   }
@@ -48,7 +49,7 @@ class OmzetState{
   Future<void> getFromApi() async{
     try {
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse('http://localhost:3000/api/omzets'));
+      var request = await httpClient.getUrl(Uri.parse('http://10.0.2.2:3000/api/omzets'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();
