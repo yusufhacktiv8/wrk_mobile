@@ -3,22 +3,22 @@ import 'dart:async';
 
 import 'dart:convert';
 
-class Omzet {
+class Sales {
   final int month;
   final double plan;
   final double actual;
 
-  Omzet({
+  Sales({
     this.month,
     this.plan,
     this.actual
   });
 
-  static List<Omzet> fromJsonArray(String jsonArrayString){
+  static List<Sales> fromJsonArray(String jsonArrayString){
     List data = json.decode(jsonArrayString);
-    List<Omzet> result = [];
+    List<Sales> result = [];
     for(var i=0; i<data.length; i++){
-      result.add(new Omzet(
+      result.add(new Sales(
           month: data[i]["month"],
           plan: double.parse(data[i]["plan"].toString()),
           actual: double.parse(data[i]["actual"].toString())
@@ -29,12 +29,12 @@ class Omzet {
   }
 }
 
-class OmzetState{
-  List<Omzet> posts;
+class SalesState{
+  List<Sales> posts;
   bool loading;
   bool error;
 
-  OmzetState({
+  SalesState({
     this.posts = const [],
     this.loading = true,
     this.error = false,
@@ -49,11 +49,11 @@ class OmzetState{
   Future<void> getFromApi() async{
     try {
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse('http://10.0.2.2:3000/api/omzets?year=2018'));
+      var request = await httpClient.getUrl(Uri.parse('http://10.0.2.2:3000/api/sales?year=2018'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();
-        this.posts = Omzet.fromJsonArray(json);
+        this.posts = Sales.fromJsonArray(json);
         this.loading = false;
         this.error = false;
       }

@@ -1,5 +1,5 @@
-import 'package:dashboard/omzet_chart.dart';
 import 'package:dashboard/omzet_chart_stateful.dart';
+import 'package:dashboard/sales_chart_stateful.dart';
 import 'package:flutter/material.dart';
 
 class TabBarDemo extends StatelessWidget {
@@ -24,7 +24,7 @@ class TabBarDemo extends StatelessWidget {
             // ignore: not_enough_required_arguments
 //            AreaAndLineChart.withSampleData(),
             new PostPage(),
-            new Icon(Icons.show_chart),
+            new SalesChart(),
             new Icon(Icons.insert_chart),
           ],
         ),
