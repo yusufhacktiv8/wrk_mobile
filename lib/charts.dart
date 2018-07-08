@@ -1,16 +1,48 @@
 import 'package:dashboard/omzet_chart_stateful.dart';
 import 'package:dashboard/sales_chart_stateful.dart';
 import 'package:dashboard/credit_chart_stateful.dart';
+import 'package:dashboard/summary_page.dart';
+import 'package:dashboard/qmsl_page.dart';
 import 'package:flutter/material.dart';
 
 class TabBarDemo extends StatelessWidget {
+
+
+
   @override
   Widget build(BuildContext context) {
+    void _select(Choice choice) {
+      if (choice.title == 'Summary') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SummaryPage()),
+        );
+      } else if (choice.title == 'QMSL') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => QmslPage()),
+        );
+      }
+
+    }
     return new DefaultTabController(
       length: 3,
       child: new Scaffold(
         appBar: new AppBar(
           centerTitle: true,
+          actions: [
+            PopupMenuButton<Choice>(
+              onSelected: _select,
+              itemBuilder: (BuildContext context) {
+                return choices.map((Choice choice) {
+                  return PopupMenuItem<Choice>(
+                    value: choice,
+                    child: Text(choice.title),
+                  );
+                }).toList();
+              },
+            ),
+          ],
           title: new Text("Dashboard"),
           bottom: new TabBar(
             tabs: [
@@ -33,3 +65,15 @@ class TabBarDemo extends StatelessWidget {
     );
   }
 }
+
+class Choice {
+  const Choice({this.title, this.icon});
+
+  final String title;
+  final IconData icon;
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: 'Summary', icon: Icons.directions_car),
+  const Choice(title: 'QMSL', icon: Icons.directions_bike),
+];
