@@ -74,15 +74,31 @@ class _PostPageState extends State<PostPage>{
 //  }
 
   Widget _getSuccessStateWidget(){
-    return new charts.LineChart(_createSampleData(postState.posts),
-        animate: true,
-        customSeriesRenderers: [
-          new charts.LineRendererConfig(
-            // ID used to link series to this renderer.
-              customRendererId: 'customArea',
-              includeArea: true,
-              stacked: true),
-        ]);
+//    return new charts.LineChart(_createSampleData(postState.posts),
+//        animate: true,
+//        customSeriesRenderers: [
+//          new charts.LineRendererConfig(
+//            // ID used to link series to this renderer.
+//              customRendererId: 'customArea',
+//              includeArea: true,
+//              stacked: true),
+//        ]);
+//    return ListTile(
+//      title: Text("Hellooooo"),
+//    );
+
+      return Container(
+
+        child: new charts.LineChart(_createSampleData(postState.posts),
+            animate: true,
+            customSeriesRenderers: [
+              new charts.LineRendererConfig(
+                // ID used to link series to this renderer.
+                  customRendererId: 'customArea',
+                  includeArea: true,
+                  stacked: true),
+            ])
+      );
   }
 
   List<charts.Series<LinearSales, int>> _createSampleData(List<Omzet> omzets) {

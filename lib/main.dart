@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:dashboard/charts.dart';
+//import 'package:dashboard/charts.dart';
+import 'package:dashboard/security/Login.dart';
+import 'package:dashboard/Dashboard.dart';
 
 void main() => runApp(new MyApp());
 
@@ -21,12 +23,12 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Dashboard'),
+      home: new Dashboard(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+/* class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -69,3 +71,4 @@ class _MyHomePageState extends State<MyHomePage> {
     return new TabBarDemo();
   }
 }
+*/
