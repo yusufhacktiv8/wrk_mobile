@@ -1,6 +1,6 @@
-import 'package:dashboard/omzet_chart_stateful.dart';
-import 'package:dashboard/sales_chart_stateful.dart';
-import 'package:dashboard/credit_chart_stateful.dart';
+import 'package:dashboard/charts/omzet_chart_stateful.dart';
+import 'package:dashboard/charts/sales_chart_stateful.dart';
+import 'package:dashboard/charts/credit_chart_stateful.dart';
 import 'package:dashboard/summary_page.dart';
 import 'package:dashboard/qmsl_page.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class TabBarDemo extends StatelessWidget {
           children: [
             // ignore: not_enough_required_arguments
 //            AreaAndLineChart.withSampleData(),
-            new PostPage(),
+            new OmzetChart(),
             new SalesChart(),
             new CreditChart(),
           ],

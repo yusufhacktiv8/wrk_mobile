@@ -14,20 +14,26 @@ class Dashboard extends StatelessWidget {
           ListTile(
             title: Text("Laba Bersih", style: TextStyle(fontSize: 17.0)),
             subtitle: Text("4.30", style: TextStyle(fontSize: 25.0)),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
 
           ),
+          Divider(height: 1.0, color: Colors.grey,),
           ListTile(
             title: Text("Proyek Kons & Fab", style: TextStyle(fontSize: 17.0)),
             subtitle: Text("4.30", style: TextStyle(fontSize: 25.0)),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
           ),
+          Divider(height: 1.0, color: Colors.grey,),
           ListTile(
             title: Text("Proyek O & M", style: TextStyle(fontSize: 17.0)),
             subtitle: Text("4.30", style: TextStyle(fontSize: 25.0)),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
           ),
+          Divider(height: 1.0, color: Colors.grey,),
           ListTile(
             title: Text("Score Card", style: TextStyle(fontSize: 17.0)),
             subtitle: Text("4.30", style: TextStyle(fontSize: 25.0)),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
           )
         ],));
   }

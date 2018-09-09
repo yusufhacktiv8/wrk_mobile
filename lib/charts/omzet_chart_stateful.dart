@@ -2,14 +2,14 @@ import 'package:dashboard/omzet.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
-class PostPage extends StatefulWidget {
-  PostPage({Key key}) : super(key: key);
+class OmzetChart extends StatefulWidget {
+  OmzetChart({Key key}) : super(key: key);
 
   @override
   _PostPageState createState() => new _PostPageState();
 }
 
-class _PostPageState extends State<PostPage>{
+class _PostPageState extends State<OmzetChart> {
   final OmzetState postState = new OmzetState();
   BuildContext context;
 
@@ -23,32 +23,32 @@ class _PostPageState extends State<PostPage>{
     if (!mounted) return;
 
     await postState.getFromApi();
-    setState((){
-      if(postState.error){
+    setState(() {
+      if (postState.error) {
         _showError();
       }
     });
   }
 
-  _retry(){
+  _retry() {
     Scaffold.of(context).removeCurrentSnackBar();
     postState.reset();
-    setState((){});
+    setState(() {});
     _getPosts();
   }
 
-  void _showError(){
+  void _showError() {
     Scaffold.of(context).showSnackBar(new SnackBar(
         content: new Text("An unknown error occurredx"),
         duration: new Duration(days: 1), // Make it permanent
         action: new SnackBarAction(
-            label : "RETRY",
-            onPressed : (){_retry();}
-        )
-    ));
+            label: "RETRY",
+            onPressed: () {
+              _retry();
+            })));
   }
 
-  Widget _getLoadingStateWidget(){
+  Widget _getLoadingStateWidget() {
     return new Center(
       child: new CircularProgressIndicator(),
     );
@@ -73,7 +73,7 @@ class _PostPageState extends State<PostPage>{
 //    );
 //  }
 
-  Widget _getSuccessStateWidget(){
+  Widget _getSuccessStateWidget() {
 //    return new charts.LineChart(_createSampleData(postState.posts),
 //        animate: true,
 //        customSeriesRenderers: [
@@ -87,18 +87,22 @@ class _PostPageState extends State<PostPage>{
 //      title: Text("Hellooooo"),
 //    );
 
-      return Container(
-
-        child: new charts.LineChart(_createSampleData(postState.posts),
-            animate: true,
-            customSeriesRenderers: [
-              new charts.LineRendererConfig(
-                // ID used to link series to this renderer.
-                  customRendererId: 'customArea',
-                  includeArea: true,
-                  stacked: true),
-            ])
-      );
+    return Column(
+      children: <Widget>[
+        Container(height: 30.0, child: Text("Omzet Kontrak", style: TextStyle(fontSize: 18.0),), alignment: Alignment.bottomCenter,),
+        Container(
+            height: 270.0,
+            child: new charts.LineChart(_createSampleData(postState.posts),
+                animate: true,
+                customSeriesRenderers: [
+                  new charts.LineRendererConfig(
+                      // ID used to link series to this renderer.
+                      customRendererId: 'customArea',
+                      includeArea: true,
+                      stacked: true),
+                ]))
+      ],
+    );
   }
 
   List<charts.Series<LinearSales, int>> _createSampleData(List<Omzet> omzets) {
@@ -128,7 +132,7 @@ class _PostPageState extends State<PostPage>{
         measureFn: (LinearSales sales, _) => sales.plan,
         data: plans,
       )
-      // Configure our custom bar target renderer for this series.
+        // Configure our custom bar target renderer for this series.
         ..setAttribute(charts.rendererIdKey, 'customArea'),
       new charts.Series<LinearSales, int>(
         id: 'Tablet',
@@ -140,21 +144,19 @@ class _PostPageState extends State<PostPage>{
     ];
   }
 
-  Widget _getErrorState(){
+  Widget _getErrorState() {
     return new Center(
       child: new Row(),
     );
   }
 
-  Widget getCurrentStateWidget(){
+  Widget getCurrentStateWidget() {
     Widget currentStateWidget;
-    if(!postState.error && !postState.loading) {
+    if (!postState.error && !postState.loading) {
       currentStateWidget = _getSuccessStateWidget();
-    }
-    else if(!postState.error){
+    } else if (!postState.error) {
       currentStateWidget = _getLoadingStateWidget();
-    }
-    else{
+    } else {
       currentStateWidget = _getErrorState();
     }
     return currentStateWidget;

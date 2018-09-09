@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:dashboard/omzet_chart_stateful.dart';
-import 'package:dashboard/sales_chart_stateful.dart';
-import 'package:dashboard/credit_chart_stateful.dart';
+import 'package:dashboard/charts/omzet_chart_stateful.dart';
+import 'package:dashboard/charts/sales_chart_stateful.dart';
+import 'package:dashboard/charts/credit_chart_stateful.dart';
 import 'package:dashboard/summary_page.dart';
 import 'package:dashboard/qmsl_page.dart';
 import 'package:dashboard/DotsIndicator.dart';
@@ -17,7 +17,7 @@ class MainCharts extends StatelessWidget {
   final _kArrowColor = Colors.black.withOpacity(0.8);
 
   final List<Widget> _pages = <Widget>[
-    new PostPage(),
+    new OmzetChart(),
     new SalesChart(),
     new CreditChart(),
   ];
@@ -32,18 +32,17 @@ class MainCharts extends StatelessWidget {
 //      },
 //    );
     return Container(
-      height: 300.0,
-      child: PageView.builder(
-      physics: new AlwaysScrollableScrollPhysics(),
-        controller: _controller,
-        itemBuilder: (BuildContext context, int index) {
-          return _pages[index % _pages.length];
-        },
-      )
-    );
+        height: 300.0,
+        child: PageView.builder(
+          physics: new AlwaysScrollableScrollPhysics(),
+          controller: _controller,
+          itemBuilder: (BuildContext context, int index) {
+            return _pages[index % _pages.length];
+          },
+        ));
   }
 
-  /*
+/*
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
