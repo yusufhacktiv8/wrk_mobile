@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dashboard/charts/MainCharts.dart';
+import 'package:dashboard/components/DashboardItem.dart';
 
 class Dashboard extends StatelessWidget {
   @override
@@ -11,12 +12,7 @@ class Dashboard extends StatelessWidget {
         ),
         body: new ListView(children: <Widget>[
           new MainCharts(),
-          ListTile(
-            title: Text("Laba Bersih", style: TextStyle(fontSize: 17.0)),
-            subtitle: Text("4.30", style: TextStyle(fontSize: 25.0)),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
-
-          ),
+          DashboardItem(),
           Divider(height: 1.0, color: Colors.grey,),
           ListTile(
             title: Text("Proyek Kons & Fab", style: TextStyle(fontSize: 17.0)),
