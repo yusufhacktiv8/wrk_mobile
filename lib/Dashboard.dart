@@ -3,6 +3,7 @@ import 'package:dashboard/charts/MainCharts.dart';
 import 'package:dashboard/components/DashboardItem.dart';
 import 'package:dashboard/components/DashboardItem2.dart';
 import 'package:dashboard/components/DashboardItem3.dart';
+import 'package:dashboard/components/DashboardItem4.dart';
 
 class Dashboard extends StatelessWidget {
   @override
@@ -20,11 +21,7 @@ class Dashboard extends StatelessWidget {
           Divider(height: 1.0, color: Colors.grey,),
           DashboardItem3(),
           Divider(height: 1.0, color: Colors.grey,),
-          ListTile(
-            title: Text("Score Card", style: TextStyle(fontSize: 17.0)),
-            subtitle: Text("4.30", style: TextStyle(fontSize: 25.0)),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
-          )
+          DashboardItem4(),
         ],));
   }
 }
