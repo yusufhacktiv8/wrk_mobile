@@ -7,15 +7,18 @@ import 'package:dashboard/Constant.dart';
 
 class Project {
   final double score;
+  final double score2;
 
   Project({
-    this.score
+    this.score,
+    this.score2
   });
 
   static Project fromJsonArray(String jsonArrayString){
     Map<String, dynamic> data = json.decode(jsonArrayString);
     Project result = Project(
       score: data["score"],
+      score2: data["score2"],
     );
     return result;
   }
