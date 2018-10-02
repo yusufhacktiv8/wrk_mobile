@@ -3,6 +3,8 @@ import 'dart:async';
 
 import 'dart:convert';
 
+import 'package:dashboard/Constant.dart';
+
 class NetProfit {
   final int month;
   final int year;
@@ -55,7 +57,7 @@ class NetProfitState{
   Future<void> getFromApi() async{
     try {
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse('http://10.0.2.2:3000/api/netprofit?year=2018&month=1'));
+      var request = await httpClient.getUrl(Uri.parse(URL + '/netprofit?year=2018&month=1'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();

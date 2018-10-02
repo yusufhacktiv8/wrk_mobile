@@ -1,39 +1,41 @@
-import 'package:dashboard/states/NetProfit.dart';
+import 'package:dashboard/states/Project.dart';
 import 'package:flutter/material.dart';
 
-class DashboardItem extends StatefulWidget {
-  DashboardItem({Key key}) : super(key: key);
+const TITLE = 'Proyek Kons & Fab';
+
+class DashboardItem2 extends StatefulWidget {
+  DashboardItem2({Key key}) : super(key: key);
 
   @override
-  _DashboardItemState createState() => new _DashboardItemState();
+  _DashboardItemState2 createState() => new _DashboardItemState2();
 }
 
-class _DashboardItemState extends State<DashboardItem> {
-  final NetProfitState netProfitState = new NetProfitState();
+class _DashboardItemState2 extends State<DashboardItem2> {
+  final ProjectState projectState = new ProjectState();
   BuildContext context;
 
   @override
   void initState() {
     super.initState();
-    _getNetProfits();
+    _getProjects();
   }
 
-  _getNetProfits() async {
+  _getProjects() async {
     if (!mounted) return;
 
-    await netProfitState.getFromApi();
+    await projectState.getFromApi();
     setState(() {
-      if (netProfitState.error) {
-        _showError();
-      }
+//      if (projectState.error) {
+//        _showError();
+//      }
     });
   }
 
   _retry() {
     Scaffold.of(context).removeCurrentSnackBar();
-    netProfitState.reset();
+    projectState.reset();
     setState(() {});
-    _getNetProfits();
+    _getProjects();
   }
 
   void _showError() {
@@ -55,24 +57,27 @@ class _DashboardItemState extends State<DashboardItem> {
 
   Widget _getSuccessStateWidget() {
     return ListTile(
-      title: Text("Laba Bersih", style: TextStyle(fontSize: 17.0)),
-      subtitle: Text(netProfitState.netProfit.ra != null ? netProfitState.netProfit.ra.toString() : '0.0', style: TextStyle(fontSize: 25.0)),
+      title: Text(TITLE, style: TextStyle(fontSize: 17.0)),
+      subtitle: Text(projectState.project.score != null ? projectState.project.score.toString() : '0.0', style: TextStyle(fontSize: 25.0)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
 
     );
   }
 
   Widget _getErrorState() {
-    return new Center(
-      child: new Row(),
+    return ListTile(
+      title: Text(TITLE, style: TextStyle(fontSize: 17.0)),
+      subtitle: Text('-'),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
+
     );
   }
 
   Widget getCurrentStateWidget() {
     Widget currentStateWidget;
-    if (!netProfitState.error && !netProfitState.loading) {
+    if (!projectState.error && !projectState.loading) {
       currentStateWidget = _getSuccessStateWidget();
-    } else if (!netProfitState.error) {
+    } else if (!projectState.error) {
       currentStateWidget = _getLoadingStateWidget();
     } else {
       currentStateWidget = _getErrorState();
