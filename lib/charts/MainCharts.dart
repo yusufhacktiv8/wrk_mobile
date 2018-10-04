@@ -17,7 +17,7 @@ class MainCharts extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> _pages = <Widget>[
       new OmzetChart(year: year),
-      new SalesChart(),
+      new SalesChart(year: year),
       new CreditChart(),
     ];
 

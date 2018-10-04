@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class SalesChart extends StatefulWidget {
-  SalesChart({Key key}) : super(key: key);
+  int year;
+  SalesChart({Key key, this.year}) : super(key: key);
 
   @override
   _SalesChartState createState() => new _SalesChartState();
@@ -11,22 +12,19 @@ class SalesChart extends StatefulWidget {
 
 class _SalesChartState extends State<SalesChart>{
   final SalesState postState = new SalesState();
-  BuildContext context;
+  int currentYear = 0;
 
   @override
   void initState() {
     super.initState();
-    _getPosts();
   }
 
-  _getPosts() async {
+  _getPosts(int year) async {
     if (!mounted) return;
 
-    await postState.getFromApi();
+    await postState.getFromApi(year);
     setState((){
-      if(postState.error){
-        _showError();
-      }
+
     });
   }
 
@@ -34,7 +32,7 @@ class _SalesChartState extends State<SalesChart>{
     Scaffold.of(context).removeCurrentSnackBar();
     postState.reset();
     setState((){});
-    _getPosts();
+    _getPosts(widget.year);
   }
 
   void _showError(){
@@ -121,6 +119,10 @@ class _SalesChartState extends State<SalesChart>{
 
   @override
   Widget build(BuildContext context) {
+    if (currentYear != widget.year) {
+      currentYear = widget.year;
+      _getPosts(widget.year);
+    }
     return getCurrentStateWidget();
   }
 }

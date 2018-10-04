@@ -47,10 +47,10 @@ class SalesState{
     this.error = false;
   }
 
-  Future<void> getFromApi() async{
+  Future<void> getFromApi(int year) async{
     try {
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse(URL + '/sales?year=2018'));
+      var request = await httpClient.getUrl(Uri.parse('$URL/sales?year=$year'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();
