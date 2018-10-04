@@ -54,10 +54,10 @@ class NetProfitState{
     this.error = false;
   }
 
-  Future<void> getFromApi() async{
+  Future<void> getFromApi(int month, int year) async{
     try {
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse(URL + '/netprofit?year=2018&month=1'));
+      var request = await httpClient.getUrl(Uri.parse('$URL/netprofit?year=$year&month=$month'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();

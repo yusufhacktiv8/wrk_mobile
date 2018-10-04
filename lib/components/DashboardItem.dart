@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 const TITLE = 'Laba Bersih';
 
 class DashboardItem extends StatefulWidget {
-  String hello;
-  DashboardItem({Key key, this.hello}) : super(key: key);
+  final int month;
+  final int year;
+
+  DashboardItem({Key key, this.month, this.year}) : super(key: key);
 
   @override
   _DashboardItemState createState() => new _DashboardItemState();
@@ -17,13 +19,13 @@ class _DashboardItemState extends State<DashboardItem> {
   @override
   void initState() {
     super.initState();
-    _getNetProfits();
+//    _getNetProfits();
   }
 
   _getNetProfits() async {
     if (!mounted) return;
 
-    await netProfitState.getFromApi();
+    await netProfitState.getFromApi(widget.month, widget.year);
     setState(() {
 //      if (netProfitState.error) {
 //        _showError();
@@ -57,7 +59,7 @@ class _DashboardItemState extends State<DashboardItem> {
 
   Widget _getSuccessStateWidget() {
     return ListTile(
-      title: Text(TITLE + " " + widget.hello, style: TextStyle(fontSize: 17.0)),
+      title: Text(TITLE, style: TextStyle(fontSize: 17.0)),
       subtitle: Text(netProfitState.netProfit.ra != null ? netProfitState.netProfit.ra.toString() : '0.0', style: TextStyle(fontSize: 25.0)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
 
@@ -67,7 +69,7 @@ class _DashboardItemState extends State<DashboardItem> {
   Widget _getErrorState() {
     return ListTile(
       title: Text(TITLE, style: TextStyle(fontSize: 17.0)),
-      subtitle: Text('-'),
+      subtitle: Text('-', style: TextStyle(fontSize: 25.0)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
 
     );
@@ -87,6 +89,7 @@ class _DashboardItemState extends State<DashboardItem> {
 
   @override
   Widget build(BuildContext context) {
+    _getNetProfits();
     return getCurrentStateWidget();
   }
 }

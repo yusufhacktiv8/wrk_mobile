@@ -48,7 +48,7 @@ class _DashboardState extends State<Dashboard> {
             selectedTextStyle: TextStyle(fontSize: 20.0, color: Colors.blueAccent),
           ),
           new MainCharts(),
-          DashboardItem(hello: _selectedMonth.month.toString(),),
+          DashboardItem(month: _selectedMonth.month, year: _selectedMonth.year),
           Divider(height: 1.0, color: Colors.grey,),
           DashboardItem2(),
           Divider(height: 1.0, color: Colors.grey,),
