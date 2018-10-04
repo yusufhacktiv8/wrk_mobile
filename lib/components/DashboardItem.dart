@@ -1,8 +1,11 @@
 import 'package:dashboard/states/NetProfit.dart';
 import 'package:flutter/material.dart';
 
+const TITLE = 'Laba Bersih';
+
 class DashboardItem extends StatefulWidget {
-  DashboardItem({Key key}) : super(key: key);
+  String hello;
+  DashboardItem({Key key, this.hello}) : super(key: key);
 
   @override
   _DashboardItemState createState() => new _DashboardItemState();
@@ -10,7 +13,6 @@ class DashboardItem extends StatefulWidget {
 
 class _DashboardItemState extends State<DashboardItem> {
   final NetProfitState netProfitState = new NetProfitState();
-  BuildContext context;
 
   @override
   void initState() {
@@ -23,9 +25,9 @@ class _DashboardItemState extends State<DashboardItem> {
 
     await netProfitState.getFromApi();
     setState(() {
-      if (netProfitState.error) {
-        _showError();
-      }
+//      if (netProfitState.error) {
+//        _showError();
+//      }
     });
   }
 
@@ -55,7 +57,7 @@ class _DashboardItemState extends State<DashboardItem> {
 
   Widget _getSuccessStateWidget() {
     return ListTile(
-      title: Text("Laba Bersih", style: TextStyle(fontSize: 17.0)),
+      title: Text(TITLE + " " + widget.hello, style: TextStyle(fontSize: 17.0)),
       subtitle: Text(netProfitState.netProfit.ra != null ? netProfitState.netProfit.ra.toString() : '0.0', style: TextStyle(fontSize: 25.0)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
 
@@ -63,8 +65,11 @@ class _DashboardItemState extends State<DashboardItem> {
   }
 
   Widget _getErrorState() {
-    return new Center(
-      child: new Row(),
+    return ListTile(
+      title: Text(TITLE, style: TextStyle(fontSize: 17.0)),
+      subtitle: Text('-'),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
+
     );
   }
 

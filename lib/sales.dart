@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:async';
 
 import 'dart:convert';
+import 'package:dashboard/Constant.dart';
 
 class Sales {
   final int month;
@@ -49,7 +50,7 @@ class SalesState{
   Future<void> getFromApi() async{
     try {
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse('http://10.0.2.2:3000/api/sales?year=2018'));
+      var request = await httpClient.getUrl(Uri.parse(URL + '/sales?year=2018'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();
