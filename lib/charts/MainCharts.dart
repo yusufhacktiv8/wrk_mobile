@@ -8,29 +8,19 @@ import 'package:dashboard/qmsl_page.dart';
 import 'package:dashboard/DotsIndicator.dart';
 
 class MainCharts extends StatelessWidget {
+  int year;
   final _controller = new PageController();
 
-  static const _kDuration = const Duration(milliseconds: 300);
-
-  static const _kCurve = Curves.ease;
-
-  final _kArrowColor = Colors.black.withOpacity(0.8);
-
-  final List<Widget> _pages = <Widget>[
-    new OmzetChart(),
-    new SalesChart(),
-    new CreditChart(),
-  ];
+  MainCharts({Key key, this.year}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
-//    return new PageView.builder(
-//      physics: new AlwaysScrollableScrollPhysics(),
-//      controller: _controller,
-//      itemBuilder: (BuildContext context, int index) {
-//        return _pages[index % _pages.length];
-//      },
-//    );
+    final List<Widget> _pages = <Widget>[
+      new OmzetChart(year: year),
+      new SalesChart(),
+      new CreditChart(),
+    ];
+
     return Container(
         height: 300.0,
         child: PageView.builder(

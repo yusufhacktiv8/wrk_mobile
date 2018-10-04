@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 const TITLE = 'Proyek Kons & Fab';
 
 class DashboardItem2 extends StatefulWidget {
-  DashboardItem2({Key key}) : super(key: key);
+  final int month;
+  final int year;
+
+  DashboardItem2({Key key, this.month, this.year}) : super(key: key);
 
   @override
   _DashboardItemState2 createState() => new _DashboardItemState2();
@@ -23,7 +26,7 @@ class _DashboardItemState2 extends State<DashboardItem2> {
   _getProjects() async {
     if (!mounted) return;
 
-    await projectState.getFromApi();
+    await projectState.getFromApi(widget.month, widget.year);
     setState(() {
 //      if (projectState.error) {
 //        _showError();
@@ -67,7 +70,7 @@ class _DashboardItemState2 extends State<DashboardItem2> {
   Widget _getErrorState() {
     return ListTile(
       title: Text(TITLE, style: TextStyle(fontSize: 17.0)),
-      subtitle: Text('-'),
+      subtitle: Text('-', style: TextStyle(fontSize: 25.0)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
 
     );

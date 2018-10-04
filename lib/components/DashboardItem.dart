@@ -15,11 +15,12 @@ class DashboardItem extends StatefulWidget {
 
 class _DashboardItemState extends State<DashboardItem> {
   final NetProfitState netProfitState = new NetProfitState();
+  int currentMonth = 0;
 
   @override
   void initState() {
     super.initState();
-//    _getNetProfits();
+    _getNetProfits();
   }
 
   _getNetProfits() async {
@@ -89,7 +90,10 @@ class _DashboardItemState extends State<DashboardItem> {
 
   @override
   Widget build(BuildContext context) {
-    _getNetProfits();
+    if (currentMonth != widget.month) {
+      currentMonth = widget.month;
+      _getNetProfits();
+    }
     return getCurrentStateWidget();
   }
 }

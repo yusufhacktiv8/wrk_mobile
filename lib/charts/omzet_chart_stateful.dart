@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class OmzetChart extends StatefulWidget {
-  OmzetChart({Key key}) : super(key: key);
+  int year;
+  OmzetChart({Key key, this.year}) : super(key: key);
 
   @override
   _PostPageState createState() => new _PostPageState();
@@ -11,22 +12,21 @@ class OmzetChart extends StatefulWidget {
 
 class _PostPageState extends State<OmzetChart> {
   final OmzetState postState = new OmzetState();
-  BuildContext context;
+  int currentYear = 0;
 
   @override
   void initState() {
     super.initState();
-    _getPosts();
   }
 
-  _getPosts() async {
+  _getPosts(int year) async {
     if (!mounted) return;
 
-    await postState.getFromApi();
+    await postState.getFromApi(year);
     setState(() {
-      if (postState.error) {
-        _showError();
-      }
+//      if (postState.error) {
+//        _showError();
+//      }
     });
   }
 
@@ -34,7 +34,7 @@ class _PostPageState extends State<OmzetChart> {
     Scaffold.of(context).removeCurrentSnackBar();
     postState.reset();
     setState(() {});
-    _getPosts();
+    _getPosts(widget.year);
   }
 
   void _showError() {
@@ -54,39 +54,8 @@ class _PostPageState extends State<OmzetChart> {
     );
   }
 
-//  Widget _getSuccessStateWidget(){
-//    return new ListView.builder(
-//        itemCount: postState.posts.length,
-//        itemBuilder: (context, index) {
-//          return new Column(
-//              crossAxisAlignment: CrossAxisAlignment.start,
-//              children: <Widget>[
-//                new Text(postState.posts[index].month.toString(),
-//                    style: new TextStyle(fontWeight: FontWeight.bold)),
-//
-//                new Text(postState.posts[index].plan.toString()),
-//
-//                new Divider()
-//              ]
-//          );
-//        }
-//    );
-//  }
 
   Widget _getSuccessStateWidget() {
-//    return new charts.LineChart(_createSampleData(postState.posts),
-//        animate: true,
-//        customSeriesRenderers: [
-//          new charts.LineRendererConfig(
-//            // ID used to link series to this renderer.
-//              customRendererId: 'customArea',
-//              includeArea: true,
-//              stacked: true),
-//        ]);
-//    return ListTile(
-//      title: Text("Hellooooo"),
-//    );
-
     return Column(
       children: <Widget>[
         Container(height: 30.0, child: Text("Omzet Kontrak", style: TextStyle(fontSize: 18.0),), alignment: Alignment.bottomCenter,),
@@ -110,19 +79,6 @@ class _PostPageState extends State<OmzetChart> {
     omzets.forEach((element) {
       plans.add(new LinearSales(element.month, element.plan, element.actual));
     });
-//    final myFakeDesktopData = [
-//      new LinearSales(0, 5),
-//      new LinearSales(1, 25),
-//      new LinearSales(2, 100),
-//      new LinearSales(3, 75),
-//    ];
-
-//    var myFakeTabletData = [
-//      new LinearSales(0, 10.1),
-//      new LinearSales(1, 50.2),
-//      new LinearSales(2, 200.3),
-//      new LinearSales(3, 150.4),
-//    ];
 
     return [
       new charts.Series<LinearSales, int>(
@@ -164,16 +120,10 @@ class _PostPageState extends State<OmzetChart> {
 
   @override
   Widget build(BuildContext context) {
-//    Widget currentWidget = getCurrentStateWidget();
-//    return new Scaffold(
-//        appBar: new AppBar(
-//          title: new Text('FeedMe'),
-//        ),
-//        body: new Builder(builder: (BuildContext context) {
-//          this.context = context;
-//          return currentWidget;
-//        })
-//    );
+    if (currentYear != widget.year) {
+      currentYear = widget.year;
+      _getPosts(widget.year);
+    }
     return getCurrentStateWidget();
   }
 }
