@@ -4,8 +4,8 @@ import 'package:dashboard/components/DashboardItem.dart';
 import 'package:dashboard/components/DashboardItem2.dart';
 import 'package:dashboard/components/DashboardItem3.dart';
 import 'package:dashboard/components/DashboardItem4.dart';
-import 'package:intl/intl.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
+import 'package:dashboard/events.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key key}) : super(key: key);
@@ -42,6 +42,7 @@ class _DashboardState extends State<Dashboard> {
             onMonthChanged: (v) {
               setState(() {
                 _selectedMonth = v;
+                eventBus.fire(new MonthYearChangedEvent(v));
               });
             },
             normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),

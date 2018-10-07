@@ -1,5 +1,6 @@
 import 'package:dashboard/states/NetProfit.dart';
 import 'package:flutter/material.dart';
+import 'package:dashboard/events.dart';
 
 const TITLE = 'Laba Bersih';
 
@@ -20,25 +21,21 @@ class _DashboardItemState extends State<DashboardItem> {
   @override
   void initState() {
     super.initState();
-    _getNetProfits();
+    _getNetProfits(widget.month, widget.year);
+    eventBus.on<MonthYearChangedEvent>().listen((event) {
+      _getNetProfits(event.monthYear.month, event.monthYear.year);
+    });
   }
 
-  _getNetProfits() async {
+  _getNetProfits(int month, int year) async {
     if (!mounted) return;
 
-    await netProfitState.getFromApi(widget.month, widget.year);
+    await netProfitState.getFromApi(month, year);
     setState(() {
 //      if (netProfitState.error) {
 //        _showError();
 //      }
     });
-  }
-
-  _retry() {
-    Scaffold.of(context).removeCurrentSnackBar();
-    netProfitState.reset();
-    setState(() {});
-    _getNetProfits();
   }
 
   void _showError() {
@@ -48,7 +45,7 @@ class _DashboardItemState extends State<DashboardItem> {
         action: new SnackBarAction(
             label: "RETRY",
             onPressed: () {
-              _retry();
+//              _retry();
             })));
   }
 
@@ -90,10 +87,6 @@ class _DashboardItemState extends State<DashboardItem> {
 
   @override
   Widget build(BuildContext context) {
-    if (currentMonth != widget.month) {
-      currentMonth = widget.month;
-      _getNetProfits();
-    }
     return getCurrentStateWidget();
   }
 }
