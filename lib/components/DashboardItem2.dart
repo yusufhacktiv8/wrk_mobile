@@ -1,5 +1,6 @@
 import 'package:dashboard/states/Project.dart';
 import 'package:flutter/material.dart';
+import 'package:dashboard/events.dart';
 
 const TITLE = 'Proyek Kons & Fab';
 
@@ -20,13 +21,16 @@ class _DashboardItemState2 extends State<DashboardItem2> {
   @override
   void initState() {
     super.initState();
-    _getProjects();
+    _getProjects(widget.month, widget.year);
+    eventBus.on<MonthYearChangedEvent>().listen((event) {
+      _getProjects(event.monthYear.month, event.monthYear.year);
+    });
   }
 
-  _getProjects() async {
+  _getProjects(int month, int year) async {
     if (!mounted) return;
 
-    await projectState.getFromApi(widget.month, widget.year);
+    await projectState.getFromApi(month, year);
     setState(() {
 //      if (projectState.error) {
 //        _showError();
@@ -38,7 +42,7 @@ class _DashboardItemState2 extends State<DashboardItem2> {
     Scaffold.of(context).removeCurrentSnackBar();
     projectState.reset();
     setState(() {});
-    _getProjects();
+//    _getProjects();
   }
 
   void _showError() {

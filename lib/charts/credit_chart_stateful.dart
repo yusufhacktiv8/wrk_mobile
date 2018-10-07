@@ -53,12 +53,19 @@ class _CreditChartState extends State<CreditChart>{
   }
 
   Widget _getSuccessStateWidget(){
+
+    List<Credit> _chartData = [new Credit(month: 0, pu: 0.0, tb: 0.0)];
+
+    if (postState.posts.length > 0) {
+      _chartData = postState.posts;
+    }
+
     return Column(
       children: <Widget>[
         Container(height: 30.0, child: Text("Piutang", style: TextStyle(fontSize: 18.0),), alignment: Alignment.bottomCenter,),
         Container(
             height: 270.0,
-            child: new charts.LineChart(_createSampleData(postState.posts),
+            child: new charts.LineChart(_createSampleData(_chartData),
                 animate: true,
                 customSeriesRenderers: [
                   new charts.LineRendererConfig(

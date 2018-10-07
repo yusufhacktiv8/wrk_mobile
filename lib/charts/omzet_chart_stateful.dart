@@ -56,21 +56,30 @@ class _PostPageState extends State<OmzetChart> {
 
 
   Widget _getSuccessStateWidget() {
+
+    List<Omzet> chartData = [new Omzet(month: 0, plan: 0.0, actual: 0.0)];
+
+    if (postState.posts.length > 0) {
+      chartData = postState.posts;
+    }
+
+    charts.LineChart lineChart = new charts.LineChart(_createSampleData(chartData),
+        animate: true,
+        customSeriesRenderers: [
+          new charts.LineRendererConfig(
+            // ID used to link series to this renderer.
+              customRendererId: 'customArea',
+              includeArea: true,
+              stacked: true),
+        ]);
+
     return Column(
       children: <Widget>[
         Container(height: 30.0, child: Text("Omzet Kontrak", style: TextStyle(fontSize: 18.0),), alignment: Alignment.bottomCenter,),
         Container(
             height: 270.0,
-            child: new charts.LineChart(_createSampleData(postState.posts),
-                animate: true,
-                customSeriesRenderers: [
-                  new charts.LineRendererConfig(
-                      // ID used to link series to this renderer.
-                      customRendererId: 'customArea',
-                      includeArea: true,
-                      stacked: true),
-                ]))
-      ],
+            child: lineChart,
+        )],
     );
   }
 

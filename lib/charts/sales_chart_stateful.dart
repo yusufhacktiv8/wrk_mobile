@@ -53,12 +53,18 @@ class _SalesChartState extends State<SalesChart>{
   }
 
   Widget _getSuccessStateWidget(){
+
+    List<Sales> _chartData = [new Sales(month: 0, plan: 0.0, actual: 0.0)];
+
+    if (postState.posts.length > 0) {
+      _chartData = postState.posts;
+    }
     return Column(
       children: <Widget>[
         Container(height: 30.0, child: Text("Sales", style: TextStyle(fontSize: 18.0),), alignment: Alignment.bottomCenter,),
         Container(
             height: 270.0,
-            child: new charts.LineChart(_createSampleData(postState.posts),
+            child: new charts.LineChart(_createSampleData(_chartData),
                 animate: true,
                 customSeriesRenderers: [
                   new charts.LineRendererConfig(
