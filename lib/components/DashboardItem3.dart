@@ -1,4 +1,4 @@
-import 'package:dashboard/states/Project.dart';
+import 'package:dashboard/states/ProjectCount.dart';
 import 'package:flutter/material.dart';
 
 const TITLE = 'Proyek O & M';

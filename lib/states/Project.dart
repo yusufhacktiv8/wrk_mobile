@@ -1,66 +1,28 @@
-import 'dart:io';
-import 'dart:async';
 import 'dart:convert';
 
-import 'package:dashboard/Constant.dart';
-
-
 class Project {
-  final double score;
-  final double score2;
+  final String name;
 
   Project({
-    this.score,
-    this.score2
+    this.name,
   });
 
-  static Project fromJsonArray(String jsonArrayString){
+  static Project fromJson(String jsonArrayString){
     Map<String, dynamic> data = json.decode(jsonArrayString);
     Project result = Project(
-      score: data["score"],
-      score2: data["score2"],
+      name: data["name"],
     );
     return result;
   }
-}
 
-class ProjectState{
-  Project project;
-  bool loading;
-  bool error;
-
-  ProjectState({
-    this.project,
-    this.loading = true,
-    this.error = false,
-  });
-
-  void reset(){
-    this.project;
-    this.loading = true;
-    this.error = false;
-  }
-
-  Future<void> getFromApi(int month, int year) async{
-    try {
-      var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse('$URL/project?year=$year&month=$month'));
-      var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
-        this.project = Project.fromJsonArray(json);
-        this.loading = false;
-        this.error = false;
-      }
-      else{
-        this.project;
-        this.loading = false;
-        this.error = true;
-      }
-    } catch (exception) {
-      this.project;
-      this.loading = false;
-      this.error = true;
+  static List<Project> fromJsonArray(String jsonArrayString){
+    List data = json.decode(jsonArrayString);
+    List<Project> result = [];
+    for(var i=0; i<data.length; i++){
+      result.add(new Project(
+        name: data[i]["Project"]["name"],
+      ));
     }
+    return result;
   }
 }

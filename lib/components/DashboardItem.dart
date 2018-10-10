@@ -60,6 +60,7 @@ class _DashboardItemState extends State<DashboardItem> {
       title: Text(TITLE, style: TextStyle(fontSize: 17.0)),
       subtitle: Text(netProfitState.netProfit.ra != null ? netProfitState.netProfit.ra.toString() : '0.0', style: TextStyle(fontSize: 25.0)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
+      onTap: () => Navigator.pushNamed(context, '/projects'),
 
     );
   }

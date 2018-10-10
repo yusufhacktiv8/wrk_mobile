@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 //import 'package:dashboard/charts.dart';
 import 'package:dashboard/security/Login.dart';
 import 'package:dashboard/Dashboard.dart';
+import 'package:dashboard/pages/ProjectPage.dart';
 
 void main() => runApp(new MyApp());
 
@@ -23,7 +24,11 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: new Dashboard(),
+//      home: new Dashboard(),
+      routes: {
+        '/': (context) => Dashboard(),
+        '/projects': (context) => ProjectPage(),
+      },
     );
   }
 }
