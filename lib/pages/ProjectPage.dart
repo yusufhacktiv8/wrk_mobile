@@ -30,9 +30,16 @@ class _ProjectPageState extends State<ProjectPage> {
     ),
     body:ListView.builder(
       itemBuilder: (BuildContext context, int index) =>
-          ListTile(
-            title: Text(projects[index].name, style: TextStyle(fontSize: 17.0)),
-          ),
+        Column(
+          children: <Widget>[
+            ListTile(
+              title: Text(projects[index].name, style: TextStyle(fontSize: 17.0)),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,)
+            ),
+            Divider(height: 1.0, color: Colors.grey,),
+          ],
+        )
+          ,
       itemCount: projects.length,
     ));
   }
