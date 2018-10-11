@@ -5,6 +5,7 @@ import 'package:dashboard/states/ProjectCount.dart';
 import 'package:flutter/material.dart';
 import 'package:dashboard/Constant.dart';
 import 'package:flutter/foundation.dart';
+import 'package:dashboard/pages/ProjectPage.dart';
 
 const TITLE = 'Proyek Kons & Fab';
 
@@ -41,7 +42,16 @@ class _DashboardItemState2 extends State<DashboardItem2> {
       title: Text(TITLE, style: TextStyle(fontSize: 17.0)),
       subtitle: Text(projectCount.count != null ? projectCount.count.toString() : '0', style: TextStyle(fontSize: 25.0)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
-      onTap: () => Navigator.pushNamed(context, '/projects'),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProjectPage(
+              year: 2018,
+              month: 1,
+              projectType: widget.projectType
+          )),
+        );
+      },
 
     );
   }

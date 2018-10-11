@@ -7,7 +7,8 @@ import 'package:dashboard/Constant.dart';
 import 'package:dashboard/states/Project.dart';
 
 class ProjectPage extends StatefulWidget {
-  ProjectPage({Key key}) : super(key: key);
+  final int year, month, projectType;
+  ProjectPage({Key key, this.year, this.month, this.projectType}) : super(key: key);
 
   @override
   _ProjectPageState createState() => new _ProjectPageState();
@@ -19,7 +20,7 @@ class _ProjectPageState extends State<ProjectPage> {
   @override
   void initState() {
     super.initState();
-    _getProjects(2018, 1);
+    _getProjects(widget.year, widget.month, widget.projectType);
   }
 
   @override
@@ -44,18 +45,19 @@ class _ProjectPageState extends State<ProjectPage> {
     ));
   }
 
-  _getProjects(int year, int month) async {
+  _getProjects(int year, int month, int projectType) async {
     if (!mounted) return;
 
-    await this.getFromApi(month, year);
+    await this.getFromApi(month, year, projectType);
     setState(() {
     });
   }
 
-  Future<void> getFromApi(int month, int year) async{
+  Future<void> getFromApi(int month, int year, int projectType) async{
     try {
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse('$URL/projectprogresses/bymonthyear?year=$year&month=$month'));
+      var request = await httpClient.getUrl(Uri.parse('$URL/projectprogresses/bymonthyear?'
+          'year=$year&month=$month&projectType=$projectType'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();
