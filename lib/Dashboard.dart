@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:dashboard/charts/MainCharts.dart';
 import 'package:dashboard/components/DashboardItem.dart';
 import 'package:dashboard/components/DashboardItem2.dart';
-import 'package:dashboard/components/DashboardItem3.dart';
 import 'package:dashboard/components/DashboardItem4.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 import 'package:dashboard/events.dart';
@@ -51,9 +50,9 @@ class _DashboardState extends State<Dashboard> {
           new MainCharts(year: _selectedMonth.year),
           DashboardItem(month: _selectedMonth.month, year: _selectedMonth.year),
           Divider(height: 1.0, color: Colors.grey,),
-          DashboardItem2(month: _selectedMonth.month, year: _selectedMonth.year),
+          DashboardItem2(projectType: 1,),
           Divider(height: 1.0, color: Colors.grey,),
-          DashboardItem3(),
+          DashboardItem2(projectType: 2,),
           Divider(height: 1.0, color: Colors.grey,),
           DashboardItem4(),
         ],));
