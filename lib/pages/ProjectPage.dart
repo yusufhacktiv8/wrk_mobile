@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/states/Project.dart';
+import 'package:dashboard/pages/ProjectItem.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 
 class ProjectPage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _ProjectPageState extends State<ProjectPage> {
   void initState() {
     super.initState();
     _selectedMonth = new DateTime(widget.year, widget.month);
-    _getProjects(widget.year, widget.month, widget.projectType);
+    _getProjects();
   }
 
   @override
@@ -44,6 +45,7 @@ class _ProjectPageState extends State<ProjectPage> {
           onMonthChanged: (v) {
             setState(() {
               _selectedMonth = v;
+              _getProjects();
             });
           },
           normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),
@@ -54,10 +56,7 @@ class _ProjectPageState extends State<ProjectPage> {
             itemBuilder: (BuildContext context, int index) =>
                 Column(
                   children: <Widget>[
-                    ListTile(
-                        title: Text(projects[index].name, style: TextStyle(fontSize: 17.0)),
-                        trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,)
-                    ),
+                    ProjectItem(project: projects[index]),
                     Divider(height: 1.0, color: Colors.grey,),
                   ],
                 )
@@ -70,10 +69,10 @@ class _ProjectPageState extends State<ProjectPage> {
     ));
   }
 
-  _getProjects(int year, int month, int projectType) async {
+  _getProjects() async {
     if (!mounted) return;
 
-    await this.getFromApi(month, year, projectType);
+    await this.getFromApi(_selectedMonth.month, _selectedMonth.year, widget.projectType);
     setState(() {
     });
   }

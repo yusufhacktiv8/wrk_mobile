@@ -50,9 +50,9 @@ class _DashboardState extends State<Dashboard> {
           new MainCharts(year: _selectedMonth.year),
           DashboardItem(month: _selectedMonth.month, year: _selectedMonth.year),
           Divider(height: 1.0, color: Colors.grey,),
-          DashboardItem2(projectType: 1,),
+          DashboardItem2(projectType: 1, title: 'Kons & Fab',),
           Divider(height: 1.0, color: Colors.grey,),
-          DashboardItem2(projectType: 2,),
+          DashboardItem2(projectType: 2, title: 'O & M'),
           Divider(height: 1.0, color: Colors.grey,),
           DashboardItem4(),
         ],));
