@@ -1,7 +1,7 @@
 import 'package:dashboard/states/NetProfit.dart';
 import 'package:flutter/material.dart';
 import 'package:dashboard/events.dart';
-import 'package:dashboard/pages/NetProfitPage.dart';
+import 'package:dashboard/pages/hasilusaha/HasilUsahaPage.dart';
 
 const TITLE = 'Laba Bersih';
 
@@ -64,7 +64,7 @@ class _DashboardItemState extends State<DashboardItem> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => NetProfitPage(
+          MaterialPageRoute(builder: (context) => HasilUsahaPage(
               year: 2018,
               month: 1,
               projectType: 1

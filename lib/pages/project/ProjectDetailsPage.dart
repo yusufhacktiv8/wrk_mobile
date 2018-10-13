@@ -6,7 +6,8 @@ import 'dart:convert';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/models/ProjectProgress.dart';
 import 'package:dashboard/models/Project.dart';
-import 'package:dashboard/pages/ProjectInfo.dart';
+import 'package:dashboard/pages/project/ProjectInfo.dart';
+import 'package:dashboard/pages/project/OmzetKontrak.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 
 class ProjectDetailsPage extends StatefulWidget {
@@ -58,11 +59,7 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
                 child: Column(
                   children: <Widget>[
                     ProjectInfo(project: project),
-                    Card(
-                      child: ListTile(
-                        title: Text("Omzet Kontrak"),
-                      ),
-                    ),
+                    OmzetKontrak(project: project),
                     Card(
                       child: ListTile(
                         title: Text("BAST"),

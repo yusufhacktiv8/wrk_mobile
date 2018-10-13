@@ -5,7 +5,7 @@ import 'package:dashboard/states/ProjectCount.dart';
 import 'package:flutter/material.dart';
 import 'package:dashboard/Constant.dart';
 import 'package:flutter/foundation.dart';
-import 'package:dashboard/pages/ProjectPage.dart';
+import 'package:dashboard/pages/project/ProjectPage.dart';
 import 'package:dashboard/events.dart';
 
 const TITLE = 'Proyek Kons & Fab';

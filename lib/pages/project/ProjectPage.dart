@@ -5,7 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/models/ProjectProgress.dart';
-import 'package:dashboard/pages/ProjectItem.dart';
+import 'package:dashboard/pages/project/ProjectItem.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 
 class ProjectPage extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dashboard/models/ProjectProgress.dart';
-import 'package:dashboard/pages/ProjectDetailsPage.dart';
+import 'package:dashboard/pages/project/ProjectDetailsPage.dart';
 
 class ProjectItem extends StatelessWidget {
   final ProjectProgress projectProgress;
