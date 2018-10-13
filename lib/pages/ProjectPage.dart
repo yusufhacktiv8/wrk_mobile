@@ -30,7 +30,7 @@ class _ProjectPageState extends State<ProjectPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(appBar: new AppBar(
-      title: new Text('Dashboard'),
+      title: new Text('Project'),
       centerTitle: true,
     ),
     body: Column(

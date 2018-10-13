@@ -1,6 +1,7 @@
 import 'package:dashboard/states/NetProfit.dart';
 import 'package:flutter/material.dart';
 import 'package:dashboard/events.dart';
+import 'package:dashboard/pages/NetProfitPage.dart';
 
 const TITLE = 'Laba Bersih';
 
@@ -60,6 +61,16 @@ class _DashboardItemState extends State<DashboardItem> {
       title: Text(TITLE, style: TextStyle(fontSize: 17.0)),
       subtitle: Text(netProfitState.netProfit.ra != null ? netProfitState.netProfit.ra.toString() : '0.0', style: TextStyle(fontSize: 25.0)),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16.0,),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NetProfitPage(
+              year: 2018,
+              month: 1,
+              projectType: 1
+          )),
+        );
+      },
 
     );
   }

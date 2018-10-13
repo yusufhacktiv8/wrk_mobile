@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dashboard/states/Project.dart';
+import 'package:dashboard/pages/ProjectDetailsPage.dart';
 
 class ProjectItem extends StatelessWidget {
   final Project project;
@@ -9,6 +10,16 @@ class ProjectItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ProjectDetailsPage(
+                year: 2018,
+                month: 1,
+                projectId: project.id
+            )),
+          );
+        },
         title: Text(project.name,
             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
         subtitle: Column(
