@@ -8,6 +8,7 @@ import 'package:dashboard/models/ProjectProgress.dart';
 import 'package:dashboard/models/Project.dart';
 import 'package:dashboard/pages/project/ProjectInfo.dart';
 import 'package:dashboard/pages/project/OmzetKontrak.dart';
+import 'package:dashboard/pages/project/TimProyek.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 
 class ProjectDetailsPage extends StatefulWidget {
@@ -60,21 +61,7 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
                   children: <Widget>[
                     ProjectInfo(project: project),
                     OmzetKontrak(project: project),
-                    Card(
-                      child: ListTile(
-                        title: Text("BAST"),
-                      ),
-                    ),
-                    Card(
-                      child: ListTile(
-                        title: Text("Tim Proyek"),
-                      ),
-                    ),
-                    Card(
-                      child: ListTile(
-                        title: Text("Progress"),
-                      ),
-                    ),
+                    TimProyek(project: project)
                   ],
                 )
             )

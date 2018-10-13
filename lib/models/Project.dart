@@ -9,6 +9,11 @@ class Project {
   double omzetKontrak;
   DateTime startDate;
   DateTime endDate;
+  String mp;
+  String keu;
+  String kom;
+  String pelut;
+  String eng;
 
   Project({
     this.id,
@@ -19,6 +24,11 @@ class Project {
     this.omzetKontrak,
     this.startDate,
     this.endDate,
+    this.mp,
+    this.keu,
+    this.kom,
+    this.pelut,
+    this.eng,
   });
 
   static Project fromData(Map<String, dynamic> data){
@@ -31,6 +41,11 @@ class Project {
       omzetKontrak: data["omzetKontrak"] != null ? (data["omzetKontrak"] as num).toDouble() : 0.0,
       startDate: data["startDate"] != null ? DateTime.parse(data["startDate"]) : null,
       endDate: data["endDate"] != null ? DateTime.parse(data["endDate"]) : null,
+      mp: data["mp"],
+      keu: data["keu"],
+      kom: data["kom"],
+      pelut: data["pelut"],
+      eng: data["eng"],
     );
     return result;
   }

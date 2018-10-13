@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 //import 'package:dashboard/charts.dart';
 import 'package:dashboard/security/Login.dart';
 import 'package:dashboard/Dashboard.dart';
-import 'package:dashboard/pages/ProjectPage.dart';
+import 'package:dashboard/pages/project/ProjectPage.dart';
 
 void main() => runApp(new MyApp());
 
