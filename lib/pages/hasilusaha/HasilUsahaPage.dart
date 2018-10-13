@@ -54,6 +54,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
               itemCount: 2,
               controller: _controller,
               onPageSelected: (int page) {
+                if (!mounted) return;
                 _controller.animateToPage(
                   page,
                   duration: _kDuration,
