@@ -4,13 +4,17 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import 'package:dashboard/Constant.dart';
+import 'package:month_picker_strip/month_picker_strip.dart';
 import 'package:dashboard/models/ProjectProgress.dart';
 import 'package:dashboard/models/Project.dart';
 import 'package:dashboard/pages/project/ProjectInfo.dart';
 import 'package:dashboard/pages/project/OmzetKontrak.dart';
 import 'package:dashboard/pages/project/TimProyek.dart';
 import 'package:dashboard/pages/project/Progress.dart';
-import 'package:month_picker_strip/month_picker_strip.dart';
+import 'package:dashboard/pages/project/PiutangRetensi.dart';
+import 'package:dashboard/pages/project/PiutangUsaha.dart';
+import 'package:dashboard/pages/project/Persediaan.dart';
+
 
 class ProjectDetailsPage extends StatefulWidget {
   final int year, month, projectId;
@@ -58,12 +62,15 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
               selectedTextStyle: TextStyle(fontSize: 20.0, color: Colors.blueAccent),
             ),
             new Expanded(
-                child: Column(
+                child: ListView(
                   children: <Widget>[
                     ProjectInfo(project: project),
                     OmzetKontrak(project: project),
                     TimProyek(project: project),
                     Progress(projectProgress: projectProgress),
+                    PiutangRetensi(projectProgress: projectProgress),
+                    PiutangUsaha(projectProgress: projectProgress),
+                    Persediaan(projectProgress: projectProgress),
                   ],
                 )
             )
