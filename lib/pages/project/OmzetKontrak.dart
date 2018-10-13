@@ -17,12 +17,14 @@ class OmzetKontrak extends StatelessWidget {
         subtitle: Column(
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text("OK ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
                 Text(project != null ? project.omzetKontrak.toString() : "-", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
                   children: <Widget>[

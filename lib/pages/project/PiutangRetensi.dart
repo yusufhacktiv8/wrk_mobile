@@ -17,6 +17,7 @@ class PiutangRetensi extends StatelessWidget {
         subtitle: Column(
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
                   children: <Widget>[

@@ -14,6 +14,7 @@ import 'package:dashboard/pages/project/Progress.dart';
 import 'package:dashboard/pages/project/PiutangRetensi.dart';
 import 'package:dashboard/pages/project/PiutangUsaha.dart';
 import 'package:dashboard/pages/project/Persediaan.dart';
+import 'package:dashboard/pages/project/Qmsl.dart';
 
 
 class ProjectDetailsPage extends StatefulWidget {
@@ -71,6 +72,7 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
                     PiutangRetensi(projectProgress: projectProgress),
                     PiutangUsaha(projectProgress: projectProgress),
                     Persediaan(projectProgress: projectProgress),
+                    Qmsl(project: project),
                   ],
                 )
             )

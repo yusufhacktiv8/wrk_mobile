@@ -17,6 +17,7 @@ class PiutangUsaha extends StatelessWidget {
         subtitle: Column(
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text("Piutang Usaha ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
                 Text(projectProgress != null ?  fn.format(projectProgress.piutangUsaha) : "-", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),

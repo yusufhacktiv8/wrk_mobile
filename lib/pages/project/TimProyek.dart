@@ -17,12 +17,14 @@ class TimProyek extends StatelessWidget {
         subtitle: Column(
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text("Manager ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
                 Text(project != null && project.mp != null ? project.mp : "-", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
                   children: <Widget>[
@@ -39,6 +41,7 @@ class TimProyek extends StatelessWidget {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
                   children: <Widget>[
