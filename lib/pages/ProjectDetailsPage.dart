@@ -4,8 +4,9 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import 'package:dashboard/Constant.dart';
-import 'package:dashboard/states/Project.dart';
-import 'package:dashboard/pages/ProjectItem.dart';
+import 'package:dashboard/models/ProjectProgress.dart';
+import 'package:dashboard/models/Project.dart';
+import 'package:dashboard/pages/ProjectInfo.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 
 class ProjectDetailsPage extends StatefulWidget {
@@ -17,14 +18,16 @@ class ProjectDetailsPage extends StatefulWidget {
 }
 
 class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
-  List<Project> projects = [];
+  Project project;
+  ProjectProgress projectProgress;
   DateTime _selectedMonth;
 
   @override
   void initState() {
     super.initState();
     _selectedMonth = new DateTime(widget.year, widget.month);
-    _getProjects();
+    _getProjectProgress();
+    _getProject();
   }
 
   @override
@@ -45,7 +48,7 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
               onMonthChanged: (v) {
                 setState(() {
                   _selectedMonth = v;
-                  _getProjects();
+                  _getProjectProgress();
                 });
               },
               normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),
@@ -54,11 +57,7 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
             new Expanded(
                 child: Column(
                   children: <Widget>[
-                    Card(
-                      child: ListTile(
-                        title: Text("Info"),
-                      ),
-                    ),
+                    ProjectInfo(project: project),
                     Card(
                       child: ListTile(
                         title: Text("Omzet Kontrak"),
@@ -87,29 +86,54 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
         ));
   }
 
-  _getProjects() async {
+  _getProjectProgress() async {
     if (!mounted) return;
 
-    await this.getFromApi(_selectedMonth.month, _selectedMonth.year, widget.projectId);
+    await this.getProjectProgressFromApi(_selectedMonth.month, _selectedMonth.year, widget.projectId);
     setState(() {
     });
   }
 
-  Future<void> getFromApi(int month, int year, int projectType) async{
+  _getProject() async {
+    if (!mounted) return;
+
+    await this.getProjectFromApi(widget.projectId);
+    setState(() {
+    });
+  }
+
+  Future<void> getProjectProgressFromApi(int month, int year, int projectId) async{
     try {
       var httpClient = new HttpClient();
-      var request = await httpClient.getUrl(Uri.parse('$URL/projectprogresses/bymonthyear?'
-          'year=$year&month=$month&projectType=$projectType'));
+      var request = await httpClient.getUrl(Uri.parse('$URL/projectprogresses/byproject?'
+          'year=$year&month=$month&projectId=$projectId'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();
-        this.projects = Project.fromJsonArray(json);
+        this.projectProgress = ProjectProgress.fromJson(json);
       }
       else{
-        this.projects = [];
+        this.projectProgress = null;
       }
     } catch (exception) {
-      this.projects = [];
+      this.projectProgress = null;
+    }
+  }
+
+  Future<void> getProjectFromApi(int projectId) async{
+    try {
+      var httpClient = new HttpClient();
+      var request = await httpClient.getUrl(Uri.parse('$URL/projects/byid/$projectId'));
+      var response = await request.close();
+      if (response.statusCode == HttpStatus.OK) {
+        var json = await response.transform(UTF8.decoder).join();
+        this.project = Project.fromJson(json);
+      }
+      else{
+        this.project = null;
+      }
+    } catch (exception) {
+      this.project = null;
     }
   }
 

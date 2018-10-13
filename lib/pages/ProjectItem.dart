@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:dashboard/states/Project.dart';
+import 'package:dashboard/models/ProjectProgress.dart';
 import 'package:dashboard/pages/ProjectDetailsPage.dart';
 
 class ProjectItem extends StatelessWidget {
-  final Project project;
+  final ProjectProgress projectProgress;
 
-  ProjectItem({Key key, this.project}) : super(key: key);
+  ProjectItem({Key key, this.projectProgress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,11 @@ class ProjectItem extends StatelessWidget {
             MaterialPageRoute(builder: (context) => ProjectDetailsPage(
                 year: 2018,
                 month: 1,
-                projectId: project.id
+                projectId: projectProgress.project.id
             )),
           );
         },
-        title: Text(project.name,
+        title: Text(projectProgress.project.name,
             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
         subtitle: Column(
           children: <Widget>[
@@ -32,7 +32,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Rencana",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.ra.toString(),
+                    Text(projectProgress.ra.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -41,7 +41,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Realisasi",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.ri.toString(),
+                    Text(projectProgress.ri.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -55,7 +55,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Deviasi",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text((project.ra - project.ri).toString(),
+                    Text((projectProgress.ra - projectProgress.ri).toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -64,7 +64,7 @@ class ProjectItem extends StatelessWidget {
                     Text("PDP",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.pdp.toString(),
+                    Text(projectProgress.pdp.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -78,7 +78,7 @@ class ProjectItem extends StatelessWidget {
                     Text("BAD",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.bad.toString(),
+                    Text(projectProgress.bad.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -87,7 +87,7 @@ class ProjectItem extends StatelessWidget {
                     Text("OK",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.ok.toString(),
+                    Text(projectProgress.ok.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -101,7 +101,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Ra Progress",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.raProgress.toString(),
+                    Text(projectProgress.raProgress.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -110,7 +110,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Ri Progress",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.riProgress.toString(),
+                    Text(projectProgress.riProgress.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -124,7 +124,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Piutang Usaha",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.piutangUsaha.toString(),
+                    Text(projectProgress.piutangUsaha.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -133,7 +133,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Piutang Retensi",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.piutangRetensi.toString(),
+                    Text(projectProgress.piutangRetensi.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -147,7 +147,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Tagihan Bruto",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.tagihanBruto.toString(),
+                    Text(projectProgress.tagihanBruto.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -156,7 +156,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Persediaan",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.persediaan.toString(),
+                    Text(projectProgress.persediaan.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -170,7 +170,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Cashflow",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.cashflow.toString(),
+                    Text(projectProgress.cashflow.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),
@@ -179,7 +179,7 @@ class ProjectItem extends StatelessWidget {
                     Text("Laba Kotor",
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold)),
-                    Text(project.labaKotor.toString(),
+                    Text(projectProgress.labaKotor.toString(),
                         style: TextStyle(fontSize: 17.0))
                   ],
                 ),

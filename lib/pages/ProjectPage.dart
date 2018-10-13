@@ -4,7 +4,7 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import 'package:dashboard/Constant.dart';
-import 'package:dashboard/states/Project.dart';
+import 'package:dashboard/models/ProjectProgress.dart';
 import 'package:dashboard/pages/ProjectItem.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 
@@ -17,7 +17,7 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-  List<Project> projects = [];
+  List<ProjectProgress> projects = [];
   DateTime _selectedMonth;
 
   @override
@@ -56,7 +56,7 @@ class _ProjectPageState extends State<ProjectPage> {
             itemBuilder: (BuildContext context, int index) =>
                 Column(
                   children: <Widget>[
-                    ProjectItem(project: projects[index]),
+                    ProjectItem(projectProgress: projects[index]),
                     Divider(height: 1.0, color: Colors.grey,),
                   ],
                 )
@@ -85,7 +85,7 @@ class _ProjectPageState extends State<ProjectPage> {
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();
-        this.projects = Project.fromJsonArray(json);
+        this.projects = ProjectProgress.fromJsonArray(json);
       }
       else{
         this.projects = [];
