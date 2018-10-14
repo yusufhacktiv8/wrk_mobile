@@ -6,6 +6,7 @@ import 'package:dashboard/Constant.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 import 'package:dashboard/DotsIndicator.dart';
 import 'package:dashboard/pages/hasilusaha/HasilUsahaItem.dart';
+import 'package:dashboard/pages/hasilusaha/HasilUsahaSimpleItem.dart';
 
 class HasilUsahaPage extends StatefulWidget {
   final int year, month, projectType;
@@ -61,7 +62,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
           ),
           DotsIndicator(
             color: Colors.blueGrey,
-            itemCount: 2,
+            itemCount: 4,
             controller: _controller,
             onPageSelected: (int page) {
               if (!mounted) return;
@@ -78,7 +79,9 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
             controller: _controller,
             children: <Widget>[
               HasilUsahaItem(title: "Kontrak Dihadapi", data: _data, dataRoot: "kontrakDihadapi",),
-            HasilUsahaItem(title: "Penjualan", data: _data, dataRoot: "penjualan",),
+              HasilUsahaItem(title: "Penjualan", data: _data, dataRoot: "penjualan",),
+              HasilUsahaItem(title: "Laba Kotor", data: _data, dataRoot: "labaKotor",),
+              HasilUsahaSimpleItem(title: "Biaya Usaha", data: _data, dataRoot: "biayaUsaha",),
             ],
           ))
         ],
