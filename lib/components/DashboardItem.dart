@@ -65,9 +65,8 @@ class _DashboardItemState extends State<DashboardItem> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HasilUsahaPage(
-              year: 2018,
-              month: 1,
-              projectType: 1
+              year: widget.year,
+              month: widget.month,
           )),
         );
       },

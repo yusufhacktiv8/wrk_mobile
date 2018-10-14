@@ -4,69 +4,35 @@ import 'package:dashboard/models/Project.dart';
 
 class HasilUsahaItem extends StatefulWidget {
   final String title;
+  Map<String, dynamic> data;
 
-  HasilUsahaItem({Key key, this.title}): super(key: key);
+  HasilUsahaItem({Key key, this.title, this.data}) : super(key: key);
+
   HasilUsahaItemState createState() => new HasilUsahaItemState();
 }
 
 class NewItem {
   bool isExpanded;
-  final String header;
-  final Widget body;
-  final Icon iconpic;
-  NewItem(this.isExpanded, this.header, this.body, this.iconpic);
 
-  getBody() {
-    return Padding(
-        padding: new EdgeInsets.all(20.0),
-        child: new Column(
-            children: <Widget>[
-              Container(
-                height: 200.0,
-                child: HasilUsahaSubItem(project: Project()),
-              )
+  NewItem(this.isExpanded);
 
-            ])
-    );
-  }
 }
 
-double discretevalue = 2.0;
-double hospitaldiscretevalue = 25.0;
-
 class HasilUsahaItemState extends State<HasilUsahaItem> {
-  List<NewItem> items = <NewItem>[
-    new NewItem(
-        true,
-        'Pesanan Tahun Lalu',
-        new Padding(
-            padding: new EdgeInsets.all(20.0),
-            child: new Column(
-                children: <Widget>[
-                  Text("Hello")
 
-                ])
-        ), Icon(Icons.album)),
-    new NewItem(
-        true,
-        'Pesanan Baru',
-        new Padding(
-            padding: new EdgeInsets.all(20.0),
-            child: new Column(
-                children: <Widget>[
-                  Text("Hello")
-                ])
-        ), Icon(Icons.album)),
+  List<NewItem> items = <NewItem>[
+    new NewItem(true),
+    new NewItem(true),
     //give all your items here
   ];
 
-  ListView List_Criteria;
   Widget build(BuildContext context) {
-    List_Criteria = new ListView(
+    return ListView(
       children: [
         Padding(
           padding: new EdgeInsets.all(10.0),
-          child: Text(widget.title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+          child: Text(widget.title,
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
         ),
         new Padding(
           padding: new EdgeInsets.all(10.0),
@@ -76,13 +42,36 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
                 items[index].isExpanded = !items[index].isExpanded;
               });
             },
-            children: items.map((NewItem item) {
-              return new ExpansionPanel(
+            children: <ExpansionPanel>[
+              ExpansionPanel(
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return new ListTile(
 //                      leading: item.iconpic,
                       title: new Text(
-                        item.header,
+                    'Pesanan Tahun Lalux',
+                    textAlign: TextAlign.left,
+                    style: new TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ));
+                },
+                isExpanded: items[0].isExpanded,
+                body: Padding(
+                    padding: new EdgeInsets.all(20.0),
+                    child: new Column(children: <Widget>[
+                      Container(
+                        height: 200.0,
+                        child: HasilUsahaSubItem(project: Project()),
+                      )
+                    ])),
+              ),
+              ExpansionPanel(
+                headerBuilder: (BuildContext context, bool isExpanded) {
+                  return new ListTile(
+//                      leading: item.iconpic,
+                      title: new Text(
+                        'Pesanan Baru',
                         textAlign: TextAlign.left,
                         style: new TextStyle(
                           fontSize: 20.0,
@@ -90,15 +79,20 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
                         ),
                       ));
                 },
-                isExpanded: item.isExpanded,
-                body: item.getBody(),
-              );
-            }).toList(),
+                isExpanded: items[1].isExpanded,
+                body: Padding(
+                    padding: new EdgeInsets.all(20.0),
+                    child: new Column(children: <Widget>[
+                      Container(
+                        height: 200.0,
+                        child: HasilUsahaSubItem(project: Project()),
+                      )
+                    ])),
+              )
+            ],
           ),
         )
       ],
     );
-
-    return List_Criteria;
   }
 }
