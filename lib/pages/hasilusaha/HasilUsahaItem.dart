@@ -4,9 +4,10 @@ import 'package:dashboard/models/Project.dart';
 
 class HasilUsahaItem extends StatefulWidget {
   final String title;
+  final String dataRoot;
   Map<String, dynamic> data;
 
-  HasilUsahaItem({Key key, this.title, this.data}) : super(key: key);
+  HasilUsahaItem({Key key, this.title, this.data, this.dataRoot}) : super(key: key);
 
   HasilUsahaItemState createState() => new HasilUsahaItemState();
 }
@@ -48,7 +49,7 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
                   return new ListTile(
 //                      leading: item.iconpic,
                       title: new Text(
-                    'Pesanan Tahun Lalux',
+                    'Pesanan Tahun Lalu',
                     textAlign: TextAlign.left,
                     style: new TextStyle(
                       fontSize: 20.0,
@@ -62,7 +63,7 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
                     child: new Column(children: <Widget>[
                       Container(
                         height: 200.0,
-                        child: HasilUsahaSubItem(project: Project()),
+                        child: HasilUsahaSubItem(data: widget.data != null ? widget.data[widget.dataRoot]["pesananTahunLalu"] : null),
                       )
                     ])),
               ),
@@ -85,7 +86,7 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
                     child: new Column(children: <Widget>[
                       Container(
                         height: 200.0,
-                        child: HasilUsahaSubItem(project: Project()),
+                        child: HasilUsahaSubItem(data: widget.data != null ? widget.data[widget.dataRoot]["pesananBaru"] : null),
                       )
                     ])),
               )

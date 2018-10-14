@@ -77,7 +77,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
             physics: new AlwaysScrollableScrollPhysics(),
             controller: _controller,
             children: <Widget>[
-              HasilUsahaItem(title: "Kontrak Dihadapi", data: _data),
+              HasilUsahaItem(title: "Kontrak Dihadapi", data: _data, dataRoot: "kontrakDihadapi",),
               Text("World"),
             ],
           ))
@@ -102,7 +102,8 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var jsonString = await response.transform(UTF8.decoder).join();
-        _data = json.decode(jsonString);
+        Map<String, dynamic> revenueData = json.decode(jsonString);
+        _data = json.decode(revenueData["data"]);
       }
       else{
         this._data = null;
