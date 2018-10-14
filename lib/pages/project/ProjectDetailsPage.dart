@@ -72,7 +72,7 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
                     PiutangRetensi(projectProgress: projectProgress),
                     PiutangUsaha(projectProgress: projectProgress),
                     Persediaan(projectProgress: projectProgress),
-                    Qmsl(project: project),
+                    Qmsl(project: project, year: _selectedMonth.year, month: _selectedMonth.month,),
                   ],
                 )
             )
