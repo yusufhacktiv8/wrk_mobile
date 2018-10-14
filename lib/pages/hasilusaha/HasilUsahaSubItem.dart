@@ -36,6 +36,109 @@ class HasilUsahaSubItem extends StatelessWidget {
                     )
                   ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Text("Ri s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text("Prognosa ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text("JO", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
+            subtitle: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Text("RKAP ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text("Ra s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Text("Ri s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text("Prognosa ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text("Intern", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
+            subtitle: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Text("RKAP ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text("Ra s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Text("Ri s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text("Prognosa ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text("0.0", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      ],
+                    )
+                  ],
+                ),
               ],
             ),
           ),

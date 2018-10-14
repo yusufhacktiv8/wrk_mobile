@@ -3,6 +3,9 @@ import 'package:dashboard/pages/hasilusaha/HasilUsahaSubItem.dart';
 import 'package:dashboard/models/Project.dart';
 
 class HasilUsahaItem extends StatefulWidget {
+  final String title;
+
+  HasilUsahaItem({Key key, this.title}): super(key: key);
   HasilUsahaItemState createState() => new HasilUsahaItemState();
 }
 
@@ -19,7 +22,7 @@ class NewItem {
         child: new Column(
             children: <Widget>[
               Container(
-                height: 100.0,
+                height: 200.0,
                 child: HasilUsahaSubItem(project: Project()),
               )
 
@@ -63,7 +66,7 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
       children: [
         Padding(
           padding: new EdgeInsets.all(10.0),
-          child: Text("Kontrak Dihadapi", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+          child: Text(widget.title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
         ),
         new Padding(
           padding: new EdgeInsets.all(10.0),
@@ -77,7 +80,7 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
               return new ExpansionPanel(
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return new ListTile(
-                      leading: item.iconpic,
+//                      leading: item.iconpic,
                       title: new Text(
                         item.header,
                         textAlign: TextAlign.left,

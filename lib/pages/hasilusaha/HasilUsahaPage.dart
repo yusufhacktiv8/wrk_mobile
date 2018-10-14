@@ -70,7 +70,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
             physics: new AlwaysScrollableScrollPhysics(),
             controller: _controller,
             children: <Widget>[
-              HasilUsahaItem(),
+              HasilUsahaItem(title: "Kontrak Dihadapi"),
               Text("World"),
             ],
           ))
