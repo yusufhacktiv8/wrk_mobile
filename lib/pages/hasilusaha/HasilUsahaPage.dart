@@ -62,7 +62,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
           ),
           DotsIndicator(
             color: Colors.blueGrey,
-            itemCount: 4,
+            itemCount: 6,
             controller: _controller,
             onPageSelected: (int page) {
               if (!mounted) return;
@@ -82,6 +82,8 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
               HasilUsahaItem(title: "Penjualan", data: _data, dataRoot: "penjualan",),
               HasilUsahaItem(title: "Laba Kotor", data: _data, dataRoot: "labaKotor",),
               HasilUsahaSimpleItem(title: "Biaya Usaha", data: _data, dataRoot: "biayaUsaha",),
+              HasilUsahaSimpleItem(title: "Bunga", data: _data, dataRoot: "bunga",),
+              HasilUsahaSimpleItem(title: "Laba Rugi Lain - Lain", data: _data, dataRoot: "labaRugiLain",),
             ],
           ))
         ],
