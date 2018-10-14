@@ -78,7 +78,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
             controller: _controller,
             children: <Widget>[
               HasilUsahaItem(title: "Kontrak Dihadapi", data: _data, dataRoot: "kontrakDihadapi",),
-              Text("World"),
+            HasilUsahaItem(title: "Penjualan", data: _data, dataRoot: "penjualan",),
             ],
           ))
         ],
