@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:dashboard/models/ChartData.dart';
 
 class LineChart extends StatelessWidget {
 
@@ -9,7 +10,7 @@ class LineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (this.data != null && this.data.length > 0) {
+    if (this.data != null && this.data.length == 0) {
       return Text("No data");
     }
     return charts.LineChart(_createSeries(this.data),
@@ -43,10 +44,10 @@ class LineChart extends StatelessWidget {
   }
 }
 
-class ChartData {
-  final int month;
-  final double plan;
-  final double actual;
-
-  ChartData(this.month, this.plan, this.actual);
-}
+//class ChartData {
+//  final int month;
+//  final double plan;
+//  final double actual;
+//
+//  ChartData(this.month, this.plan, this.actual);
+//}
