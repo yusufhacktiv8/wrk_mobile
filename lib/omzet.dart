@@ -24,7 +24,6 @@ class Omzet {
           plan: double.parse(data[i]["plan"].toString()),
           actual: double.parse(data[i]["actual"].toString())
       ));
-//      print(data[i]["month"]);
     }
     return result;
   }
