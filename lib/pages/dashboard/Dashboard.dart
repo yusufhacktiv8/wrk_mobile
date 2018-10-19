@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sparkline/flutter_sparkline.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:dashboard/models/ChartData.dart';
 import 'package:dashboard/pages/dashboard/OmzetChart.dart';
+import 'package:dashboard/pages/dashboard/SalesChart.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -10,6 +12,8 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final fn = new NumberFormat("#,###.00");
+  var plan = 0.0;
   final List<List<double>> charts =
   [
     [0.0, 0.3, 0.7, 0.6, 0.55, 0.8, 1.2, 1.3, 1.35, 0.9, 1.5, 1.7, 1.8, 1.7, 1.2, 0.8, 1.9, 2.0, 2.2, 1.9, 2.2, 2.1, 2.0, 2.3, 2.4, 2.45, 2.6, 3.6, 2.6, 2.7, 2.9, 2.8, 3.4],
@@ -18,15 +22,29 @@ class _DashboardState extends State<Dashboard> {
   ];
 
   static final List<String> chartDropdownItems = [
-    'Last 7 days',
-    'Last month',
-    'Last year'
+    'Omzet',
+    'Sales',
+    'Piutang'
   ];
   String actualDropdown = chartDropdownItems[0];
   int actualChart = 0;
 
   @override
   Widget build(BuildContext context) {
+    Widget chart;
+    switch(actualChart) {
+      case 0:
+        chart = OmzetChart(year: 2018, onChanged: (ChartData data) => setState(() {
+          plan = data.plan;
+        }));
+        break;
+      case 1:
+        chart = SalesChart(year: 2018);
+        break;
+      default:
+        chart = OmzetChart(year: 2018,);
+    }
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: false,
@@ -78,11 +96,11 @@ class _DashboardState extends State<Dashboard> {
                             children: <Widget>[
                               Text('Revenue',
                                   style: TextStyle(color: Colors.green)),
-                              Text('\$16K',
+                              Text(fn.format(this.plan),
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,
-                                      fontSize: 34.0)),
+                                      fontSize: 24.0)),
                             ],
                           ),
                           DropdownButton(
@@ -111,7 +129,7 @@ class _DashboardState extends State<Dashboard> {
 //                        lineWidth: 5.0,
 //                        lineColor: Colors.greenAccent,
 //                      )
-                      OmzetChart(year: 2018,)
+                      chart,
                     ],
                   )),
             ),

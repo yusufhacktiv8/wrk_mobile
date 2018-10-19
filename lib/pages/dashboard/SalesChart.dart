@@ -2,22 +2,20 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:dashboard/models/ChartData.dart';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/components/charts/LineChart.dart';
 
-class OmzetChart extends StatefulWidget {
+class SalesChart extends StatefulWidget {
   final int year;
-  final ValueChanged<ChartData> onChanged;
 
-  OmzetChart({Key key, this.year, @required this.onChanged}) : super(key: key);
+  SalesChart({Key key, this.year}) : super(key: key);
 
   @override
-  _OmzetChartState createState() => new _OmzetChartState();
+  _SalesChartState createState() => new _SalesChartState();
 }
 
-class _OmzetChartState extends State<OmzetChart> {
+class _SalesChartState extends State<SalesChart> {
   List<ChartData> omzets = [];
 
   @override
@@ -29,7 +27,7 @@ class _OmzetChartState extends State<OmzetChart> {
             if (snapshot.data != null) {
               return Container(
                 height: 112.0,
-                child: LineChart(data: snapshot.data, onChanged: widget.onChanged),
+                child: LineChart(data: snapshot.data,),
               );
             } else {
               return new CircularProgressIndicator();
@@ -44,7 +42,7 @@ class _OmzetChartState extends State<OmzetChart> {
     try {
       var httpClient = new HttpClient();
       var request =
-          await httpClient.getUrl(Uri.parse('$URL/omzets?year=$year'));
+          await httpClient.getUrl(Uri.parse('$URL/sales?year=$year'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();

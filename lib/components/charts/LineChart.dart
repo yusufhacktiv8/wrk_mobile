@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:dashboard/models/ChartData.dart';
 
 class LineChart extends StatelessWidget {
 
   final List<ChartData> data;
+  final ValueChanged<ChartData> onChanged;
 
-  LineChart({Key key, this.data}) : super(key: key);
+  LineChart({Key key, this.data, @required this.onChanged}) : super(key: key);
+
+  _onSelectionChanged(charts.SelectionModel model) {
+      final selectedDatum = model.selectedDatum;
+      final data1 = selectedDatum[0].datum;
+      final month1 = data1.month;
+      final plan1 = data1.plan;
+      final actual1 = data1.actual;
+      this.onChanged(ChartData(month: month1, plan: plan1, actual: actual1));
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +25,12 @@ class LineChart extends StatelessWidget {
       return Text("No data");
     }
     return charts.LineChart(_createSeries(this.data),
+        selectionModels: [
+          new charts.SelectionModelConfig(
+            type: charts.SelectionModelType.info,
+            listener: _onSelectionChanged,
+          )
+        ],
         animate: true,
         customSeriesRenderers: [
           new charts.LineRendererConfig(
@@ -41,6 +58,15 @@ class LineChart extends StatelessWidget {
         data: data,
       ),
     ];
+  }
+
+  String _getMonthName(int month) {
+    switch (month) {
+      case 1:
+        return "Jan";
+      default:
+        return month.toString();
+    }
   }
 }
 
