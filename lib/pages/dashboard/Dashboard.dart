@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:month_picker_strip/month_picker_strip.dart';
 import 'package:dashboard/events.dart';
-import 'package:dashboard/models/ChartData.dart';
+import 'package:dashboard/pages/dashboard/MonthSelector.dart';
 import 'package:dashboard/pages/dashboard/OmzetChart.dart';
 import 'package:dashboard/pages/dashboard/ChartLabel.dart';
 
@@ -29,6 +30,13 @@ class _DashboardState extends State<Dashboard> {
   ];
   String actualDropdown = chartDropdownItems[0];
   int actualChart = 0;
+  DateTime _selectedMonth;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedMonth = new DateTime(2018, 1);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +85,13 @@ class _DashboardState extends State<Dashboard> {
         ),
         body: Column(
           children: <Widget>[
-            Text("Hello"),
+            MonthSelector(),
             Expanded(
               child: StaggeredGridView.count(
                 crossAxisCount: 2,
                 crossAxisSpacing: 12.0,
                 mainAxisSpacing: 12.0,
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 children: <Widget>[
                   _buildTile(
                     Padding(

@@ -57,7 +57,13 @@ class LineChart extends StatelessWidget {
               customRendererId: 'customArea',
               includeArea: true,
               stacked: true),
-        ]);
+        ],
+//        behaviors: [
+//          new charts.InitialSelection(selectedDataConfig: [
+//            new charts.SeriesDatumConfig<int>('planSeries', 3)
+//          ])
+//        ]
+    );
   }
 
   List<charts.Series<ChartData, int>> _createSeries(List<ChartData> data) {

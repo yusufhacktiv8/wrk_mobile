@@ -111,6 +111,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_picker:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "14668a957732124121275f8c6c63f81ee1a6fe1e"
+      url: "git://github.com/yangyxd/flutter_picker.git"
+    source: git
+    version: "1.0.2"
   flutter_sparkline:
     dependency: "direct main"
     description:
@@ -438,3 +447,4 @@ packages:
     version: "2.1.13"
 sdks:
   dart: ">=2.0.0-dev.58.0 <=2.0.0-edge.c080951d45e79cd25df98036c4be835b284a269c"
+  flutter: ">=0.1.4 <2.0.0"
