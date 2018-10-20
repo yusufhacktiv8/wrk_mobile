@@ -18,9 +18,20 @@ class _MonthSelectorState extends State<MonthSelector> {
   [
     [
       "January",
-      "February"
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
     ],
     [
+      2016,
       2017,
       2018
     ]
@@ -71,6 +82,7 @@ class _MonthSelectorState extends State<MonthSelector> {
   Widget build(BuildContext context) {
     String monthStr = f.format(this.selectedDateTime);
     int year = this.selectedDateTime.year;
+    final selecteds = [this.selectedDateTime.month - 1, this.selectedDateTime.year - 2016];
     String monthYearText = "$monthStr, $year";
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -84,6 +96,7 @@ class _MonthSelectorState extends State<MonthSelector> {
           ),
           onPressed: () {
             new Picker(
+              selecteds: selecteds,
                 adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(pickerData), isArray: true),
                 hideHeader: true,
                 title: new Text("Select Month"),
