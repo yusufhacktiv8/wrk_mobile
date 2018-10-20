@@ -6,6 +6,7 @@ import 'package:dashboard/events.dart';
 import 'package:dashboard/pages/dashboard/MonthSelector.dart';
 import 'package:dashboard/pages/dashboard/OmzetChart.dart';
 import 'package:dashboard/pages/dashboard/ChartLabel.dart';
+import 'package:dashboard/pages/dashboard/NetProfitTile.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -156,13 +157,9 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('Total Views',
-                                    style: TextStyle(color: Colors.blueAccent)),
-                                Text('265K',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 34.0))
+                                Text('Laba Bersih',
+                                    style: TextStyle(color: Colors.blueAccent, fontSize: 18.0)),
+                                NetProfitTile()
                               ],
                             ),
                             Material(
