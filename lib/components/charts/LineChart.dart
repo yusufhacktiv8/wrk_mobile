@@ -25,6 +25,7 @@ class LineChart extends StatelessWidget {
       return Text("No data");
     }
     return charts.LineChart(_createSeries(this.data),
+        primaryMeasureAxis: charts.NumericAxisSpec(renderSpec: new charts.NoneRenderSpec()),
         selectionModels: [
           new charts.SelectionModelConfig(
             type: charts.SelectionModelType.info,

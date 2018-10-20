@@ -11,25 +11,25 @@ class ChartData {
     this.actual,
   });
 
-  static ChartData fromData(Map<String, dynamic> data){
+  static ChartData fromData(Map<String, dynamic> data, String planField, String actualField){
     ChartData result = ChartData(
       month: data["month"],
-      plan: data["plan"] != null ? (data["plan"] as num).toDouble() : 0.0,
-      actual: data["actual"] != null ? (data["actual"] as num).toDouble() : 0.0,
+      plan: data[planField] != null ? (data[planField] as num).toDouble() : 0.0,
+      actual: data[actualField] != null ? (data[actualField] as num).toDouble() : 0.0,
     );
     return result;
   }
 
-  static ChartData fromJson(String jsonString){
+  static ChartData fromJson(String jsonString, String planField, String actualField){
     Map<String, dynamic> data = json.decode(jsonString);
-    return fromData(data);
+    return fromData(data, planField, actualField);
   }
 
-  static List<ChartData> fromJsonArray(String jsonArrayString){
+  static List<ChartData> fromJsonArray(String jsonArrayString, String planField, String actualField){
     List data = json.decode(jsonArrayString);
     List<ChartData> result = [];
     for(var i=0; i<data.length; i++){
-      result.add(fromData(data[i]));
+      result.add(fromData(data[i], planField, actualField));
     }
     return result;
   }

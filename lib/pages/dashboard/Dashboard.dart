@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:dashboard/models/ChartData.dart';
 import 'package:dashboard/pages/dashboard/OmzetChart.dart';
-import 'package:dashboard/pages/dashboard/SalesChart.dart';
 import 'package:dashboard/pages/dashboard/ChartLabel.dart';
 
 
@@ -32,16 +31,19 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    Widget chart;
+    String chartType;
     switch(actualChart) {
       case 0:
-        chart = OmzetChart(year: 2018,);
+        chartType = 'omzets';
         break;
       case 1:
-        chart = SalesChart(year: 2018);
+        chartType = 'sales';
+        break;
+      case 2:
+        chartType = 'creditsbyyear';
         break;
       default:
-        chart = OmzetChart(year: 2018,);
+        chartType = 'omzets';
     }
 
     return Scaffold(
@@ -124,7 +126,7 @@ class _DashboardState extends State<Dashboard> {
 //                        lineWidth: 5.0,
 //                        lineColor: Colors.greenAccent,
 //                      )
-                      chart,
+                      OmzetChart(year: 2018, chartType: chartType,),
                     ],
                   )),
             ),

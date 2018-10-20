@@ -10,8 +10,9 @@ import 'package:dashboard/components/charts/LineChart.dart';
 
 class OmzetChart extends StatefulWidget {
   final int year;
+  final String chartType;
 
-  OmzetChart({Key key, this.year}) : super(key: key);
+  OmzetChart({Key key, this.year, this.chartType}) : super(key: key);
 
   @override
   _OmzetChartState createState() => new _OmzetChartState();
@@ -19,6 +20,12 @@ class OmzetChart extends StatefulWidget {
 
 class _OmzetChartState extends State<OmzetChart> {
   List<ChartData> omzets = [];
+
+
+  @override
+  void initState() {
+    eventBus.fire(LineChartChangedEvent(null));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +50,17 @@ class _OmzetChartState extends State<OmzetChart> {
   }
 
   Future<void> _getFromApi(int year) async {
+    final chartType = widget.chartType;
+    String planField = chartType == 'creditsbyyear' ?'pu' : 'plan';
+    String actualField = chartType == 'creditsbyyear' ?'tb' : 'actual';
     try {
       var httpClient = new HttpClient();
       var request =
-          await httpClient.getUrl(Uri.parse('$URL/omzets?year=$year'));
+          await httpClient.getUrl(Uri.parse('$URL/$chartType?year=$year'));
       var response = await request.close();
       if (response.statusCode == HttpStatus.OK) {
         var json = await response.transform(UTF8.decoder).join();
-        return ChartData.fromJsonArray(json);
+        return ChartData.fromJsonArray(json, planField, actualField);
       } else {
         return [];
       }

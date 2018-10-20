@@ -23,10 +23,12 @@ class _ChartLabelState extends State<ChartLabel> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(this.chartData != null ? fn.format(this.chartData.plan) : '-',
+    final String ra = this.chartData != null ? fn.format(this.chartData.plan != 0 ? this.chartData.plan / 1000 : 0.0) : 'Ra';
+    final String ri = this.chartData != null ? fn.format(this.chartData.actual != 0 ? this.chartData.actual / 1000 : 0.0) : 'Ri';
+    return Text("$ra | $ri",
         style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w700,
-            fontSize: 24.0));
+            fontSize: 20.0));
   }
 }
