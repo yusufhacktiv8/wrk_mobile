@@ -59,7 +59,12 @@ class _MonthSelectorState extends State<MonthSelector> {
   @override
   void initState() {
     super.initState();
-    this.selectedDateTime = DateTime(2018, 1);
+    this.selectedDateTime = DateTime.now();
+    eventBus.on<MonthYearChangedEvent>().listen((event) {
+      setState(() {
+        this.selectedDateTime = event.dateTime;
+      });
+    });
   }
 
   @override
@@ -89,6 +94,7 @@ class _MonthSelectorState extends State<MonthSelector> {
                   final year = picker.getSelectedValues()[1];
                   var dateTime = DateTime(int.parse(year), _getMonthFormString(month));
                   eventBus.fire(MonthYearChangedEvent(dateTime));
+                  eventBus.fire(YearChangedEvent(dateTime));
                   eventBus.fire(LineChartChangedEvent(null));
                   setState(() {
                     this.selectedDateTime = dateTime;

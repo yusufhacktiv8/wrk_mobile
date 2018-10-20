@@ -37,11 +37,12 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     super.initState();
     _selectedMonth = new DateTime(2018, 1);
-    eventBus.on<MonthYearChangedEvent>().listen((event) {
-      setState(() {
-        this.year = event.monthYear.year;
-      });
-    });
+    eventBus.fire(MonthYearChangedEvent(DateTime(2018, 1)));
+//    eventBus.on<MonthYearChangedEvent>().listen((event) {
+//      setState(() {
+//        this.year = event.monthYear.year;
+//      });
+//    });
   }
 
   @override
@@ -140,7 +141,7 @@ class _DashboardState extends State<Dashboard> {
 //                        lineWidth: 5.0,
 //                        lineColor: Colors.greenAccent,
 //                      )
-                            OmzetChart(year: this.year, chartType: chartType,),
+                            OmzetChart(chartType: chartType,),
                           ],
                         )),
                   ),

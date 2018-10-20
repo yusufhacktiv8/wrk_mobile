@@ -24,7 +24,7 @@ class _DashboardItemState extends State<DashboardItem> {
     super.initState();
     _getNetProfits(widget.month, widget.year);
     eventBus.on<MonthYearChangedEvent>().listen((event) {
-      _getNetProfits(event.monthYear.month, event.monthYear.year);
+      _getNetProfits(event.dateTime.month, event.dateTime.year);
     });
   }
 

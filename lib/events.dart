@@ -4,8 +4,13 @@ import 'package:dashboard/models/ChartData.dart';
 EventBus eventBus = new EventBus();
 
 class MonthYearChangedEvent {
-  DateTime monthYear;
-  MonthYearChangedEvent(this.monthYear);
+  DateTime dateTime;
+  MonthYearChangedEvent(this.dateTime);
+}
+
+class YearChangedEvent {
+  DateTime dateTime;
+  YearChangedEvent(this.dateTime);
 }
 
 class LineChartChangedEvent {
