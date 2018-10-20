@@ -35,7 +35,7 @@ class _OmzetChartState extends State<OmzetChart> {
           if (snapshot.hasData) {
             if (snapshot.data != null) {
               return Container(
-                height: 112.0,
+                height: 145.0,
                 child: LineChart(data: snapshot.data, onChanged: (ChartData data) {
                   eventBus.fire(LineChartChangedEvent(data));
                 }),

@@ -26,6 +26,25 @@ class LineChart extends StatelessWidget {
     }
     return charts.LineChart(_createSeries(this.data),
         primaryMeasureAxis: charts.NumericAxisSpec(renderSpec: new charts.NoneRenderSpec()),
+        domainAxis: new charts.NumericAxisSpec(
+          tickProviderSpec: new charts.StaticNumericTickProviderSpec(
+            <charts.TickSpec<num>>[
+              charts.TickSpec<num>(1),
+              charts.TickSpec<num>(2),
+              charts.TickSpec<num>(3),
+              charts.TickSpec<num>(4),
+              charts.TickSpec<num>(5),
+              charts.TickSpec<num>(6),
+              charts.TickSpec<num>(7),
+              charts.TickSpec<num>(8),
+              charts.TickSpec<num>(9),
+              charts.TickSpec<num>(10),
+              charts.TickSpec<num>(11),
+              charts.TickSpec<num>(12),
+            ],
+          ),
+            showAxisLine: false,),
+//            renderSpec: new charts.NoneRenderSpec()),
         selectionModels: [
           new charts.SelectionModelConfig(
             type: charts.SelectionModelType.info,
