@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:dashboard/events.dart';
 import 'package:dashboard/models/ChartData.dart';
 import 'package:dashboard/pages/dashboard/OmzetChart.dart';
 import 'package:dashboard/pages/dashboard/ChartLabel.dart';
@@ -82,7 +83,7 @@ class _DashboardState extends State<Dashboard> {
           children: <Widget>[
             _buildTile(
               Padding(
-                  padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0, bottom: 0.0),
+                  padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 15.0, bottom: 0.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,23 +92,18 @@ class _DashboardState extends State<Dashboard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text('Revenue',
-                                  style: TextStyle(color: Colors.green)),
-                              ChartLabel(),
-                            ],
-                          ),
+                          ChartLabel(),
                           DropdownButton(
                               isDense: true,
                               value: actualDropdown,
-                              onChanged: (String value) => setState(() {
-                                actualDropdown = value;
-                                actualChart = chartDropdownItems
-                                    .indexOf(value); // Refresh the chart
-                              }),
+                              onChanged: (String value) {
+                                setState(() {
+                                  actualDropdown = value;
+                                  actualChart = chartDropdownItems
+                                      .indexOf(value); // Refresh the chart
+                                });
+                                eventBus.fire(LineChartChangedEvent(null));
+                              },
                               items: chartDropdownItems.map((String title) {
                                 return DropdownMenuItem(
                                   value: title,
@@ -115,12 +111,12 @@ class _DashboardState extends State<Dashboard> {
                                       style: TextStyle(
                                           color: Colors.blue,
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 14.0)),
+                                          fontSize: 16.0)),
                                 );
                               }).toList())
                         ],
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 4.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 1.0)),
 //                      Sparkline(
 //                        data: charts[actualChart],
 //                        lineWidth: 5.0,
