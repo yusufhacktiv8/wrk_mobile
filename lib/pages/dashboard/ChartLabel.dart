@@ -29,8 +29,8 @@ class _ChartLabelState extends State<ChartLabel> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(this.chartData != null ? _getMonthString(this.chartData.month) : 'January',
-            style: TextStyle(color: Colors.green, fontSize: 18.0)),
+        Text(this.chartData != null ? _getMonthString(this.chartData.month) : 'Month',
+            style: TextStyle(color: Colors.black, fontSize: 18.0)),
         Padding(padding: EdgeInsets.only(bottom: 8.0)),
         Row(
           children: <Widget>[
@@ -50,11 +50,11 @@ class _ChartLabelState extends State<ChartLabel> {
             Material(
 //          padding: EdgeInsets.all(4.0),
               borderRadius: BorderRadius.circular(4.0),
-              color: Colors.amber,
+              color: Colors.blueAccent,
               child: Container(
                   padding: EdgeInsets.all(5.0),
                   child: Text(ri,
-                      style: TextStyle(color: Colors.black,
+                      style: TextStyle(color: Colors.white,
                           fontWeight: FontWeight.w700,
                           fontSize: 19.0))
               ),
