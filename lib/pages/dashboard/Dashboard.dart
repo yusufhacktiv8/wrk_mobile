@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:dashboard/models/ChartData.dart';
 import 'package:dashboard/pages/dashboard/OmzetChart.dart';
 import 'package:dashboard/pages/dashboard/SalesChart.dart';
+import 'package:dashboard/pages/dashboard/ChartLabel.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -34,9 +35,7 @@ class _DashboardState extends State<Dashboard> {
     Widget chart;
     switch(actualChart) {
       case 0:
-        chart = OmzetChart(year: 2018, onChanged: (ChartData data) => setState(() {
-          plan = data.plan;
-        }));
+        chart = OmzetChart(year: 2018,);
         break;
       case 1:
         chart = SalesChart(year: 2018);
@@ -96,11 +95,7 @@ class _DashboardState extends State<Dashboard> {
                             children: <Widget>[
                               Text('Revenue',
                                   style: TextStyle(color: Colors.green)),
-                              Text(fn.format(this.plan),
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 24.0)),
+                              ChartLabel(),
                             ],
                           ),
                           DropdownButton(

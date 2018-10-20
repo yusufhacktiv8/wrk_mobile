@@ -3,15 +3,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:dashboard/events.dart';
 import 'package:dashboard/models/ChartData.dart';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/components/charts/LineChart.dart';
 
 class OmzetChart extends StatefulWidget {
   final int year;
-  final ValueChanged<ChartData> onChanged;
 
-  OmzetChart({Key key, this.year, @required this.onChanged}) : super(key: key);
+  OmzetChart({Key key, this.year}) : super(key: key);
 
   @override
   _OmzetChartState createState() => new _OmzetChartState();
@@ -29,7 +29,9 @@ class _OmzetChartState extends State<OmzetChart> {
             if (snapshot.data != null) {
               return Container(
                 height: 112.0,
-                child: LineChart(data: snapshot.data, onChanged: widget.onChanged),
+                child: LineChart(data: snapshot.data, onChanged: (ChartData data) {
+                  eventBus.fire(LineChartChangedEvent(data));
+                }),
               );
             } else {
               return new CircularProgressIndicator();
