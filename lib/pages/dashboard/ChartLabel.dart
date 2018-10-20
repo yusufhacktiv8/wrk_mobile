@@ -40,7 +40,7 @@ class _ChartLabelState extends State<ChartLabel> {
               color: Color(0x8053DC9A),
               child: Container(
                   padding: EdgeInsets.all(5.0),
-                  child: Text(ra,
+                  child: Text(ri,
                       style: TextStyle(color: Colors.black,
                           fontWeight: FontWeight.w700,
                           fontSize: 19.0))
@@ -53,7 +53,7 @@ class _ChartLabelState extends State<ChartLabel> {
               color: Colors.blueAccent,
               child: Container(
                   padding: EdgeInsets.all(5.0),
-                  child: Text(ri,
+                  child: Text(ra,
                       style: TextStyle(color: Colors.white,
                           fontWeight: FontWeight.w700,
                           fontSize: 19.0))

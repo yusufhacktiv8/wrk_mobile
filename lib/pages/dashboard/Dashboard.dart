@@ -16,6 +16,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   final fn = new NumberFormat("#,###.00");
   var plan = 0.0;
+  var year = 2018;
   final List<List<double>> charts =
   [
     [0.0, 0.3, 0.7, 0.6, 0.55, 0.8, 1.2, 1.3, 1.35, 0.9, 1.5, 1.7, 1.8, 1.7, 1.2, 0.8, 1.9, 2.0, 2.2, 1.9, 2.2, 2.1, 2.0, 2.3, 2.4, 2.45, 2.6, 3.6, 2.6, 2.7, 2.9, 2.8, 3.4],
@@ -36,6 +37,11 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     super.initState();
     _selectedMonth = new DateTime(2018, 1);
+    eventBus.on<MonthYearChangedEvent>().listen((event) {
+      setState(() {
+        this.year = event.monthYear.year;
+      });
+    });
   }
 
   @override
@@ -123,7 +129,7 @@ class _DashboardState extends State<Dashboard> {
                                             style: TextStyle(
                                                 color: Colors.blue,
                                                 fontWeight: FontWeight.w400,
-                                                fontSize: 16.0)),
+                                                fontSize: 18.0)),
                                       );
                                     }).toList())
                               ],
@@ -134,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
 //                        lineWidth: 5.0,
 //                        lineColor: Colors.greenAccent,
 //                      )
-                            OmzetChart(year: 2018, chartType: chartType,),
+                            OmzetChart(year: this.year, chartType: chartType,),
                           ],
                         )),
                   ),
