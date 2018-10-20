@@ -7,6 +7,7 @@ import 'package:dashboard/pages/dashboard/MonthSelector.dart';
 import 'package:dashboard/pages/dashboard/OmzetChart.dart';
 import 'package:dashboard/pages/dashboard/ChartLabel.dart';
 import 'package:dashboard/pages/dashboard/NetProfitTile.dart';
+import 'package:dashboard/pages/dashboard/ProjectCountTile.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -197,9 +198,9 @@ class _DashboardState extends State<Dashboard> {
                                     fontSize: 20.0)),
                             Row(
                               children: <Widget>[
-                                Text('2 ', style: TextStyle(color: Colors.black87, fontSize: 21.0, fontWeight: FontWeight.bold)),
+                                ProjectCountTile(projectType: 1,),
                                 Padding(padding: EdgeInsets.only(right: 6.0),),
-                                Text('Projects ', style: TextStyle(color: Colors.black54, fontSize: 17.0)),
+                                Text('Projects', style: TextStyle(color: Colors.black54, fontSize: 17.0)),
                               ],
                             ),
                           ]),
@@ -228,9 +229,9 @@ class _DashboardState extends State<Dashboard> {
                                     fontSize: 20.0)),
                             Row(
                               children: <Widget>[
-                                Text('7 ', style: TextStyle(color: Colors.black87, fontSize: 21.0, fontWeight: FontWeight.bold)),
+                                ProjectCountTile(projectType: 2,),
                                 Padding(padding: EdgeInsets.only(right: 6.0),),
-                                Text('Projects ', style: TextStyle(color: Colors.black54, fontSize: 17.0)),
+                                Text('Projects', style: TextStyle(color: Colors.black54, fontSize: 17.0)),
                               ],
                             ),
                           ]),
@@ -247,9 +248,9 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('Shop Items',
+                                Text('Score Card',
                                     style: TextStyle(color: Colors.redAccent)),
-                                Text('173',
+                                Text('-',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w700,
@@ -262,7 +263,7 @@ class _DashboardState extends State<Dashboard> {
                                 child: Center(
                                     child: Padding(
                                       padding: EdgeInsets.all(16.0),
-                                      child: Icon(Icons.store,
+                                      child: Icon(Icons.developer_board,
                                           color: Colors.white, size: 30.0),
                                     )))
                           ]),
