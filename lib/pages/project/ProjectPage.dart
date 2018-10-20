@@ -83,8 +83,8 @@ class _ProjectPageState extends State<ProjectPage> {
       var request = await httpClient.getUrl(Uri.parse('$URL/projectprogresses/bymonthyear?'
           'year=$year&month=$month&projectType=$projectType'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
         this.projects = ProjectProgress.fromJsonArray(json);
       }
       else{

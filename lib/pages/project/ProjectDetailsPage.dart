@@ -103,8 +103,8 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
       var request = await httpClient.getUrl(Uri.parse('$URL/projectprogresses/byproject?'
           'year=$year&month=$month&projectId=$projectId'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
         this.projectProgress = ProjectProgress.fromJson(json);
       }
       else{
@@ -120,8 +120,8 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
       var httpClient = new HttpClient();
       var request = await httpClient.getUrl(Uri.parse('$URL/projects/byid/$projectId'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
         this.project = Project.fromJson(json);
       }
       else{

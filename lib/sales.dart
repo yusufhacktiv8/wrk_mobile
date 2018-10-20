@@ -52,8 +52,8 @@ class SalesState{
       var httpClient = new HttpClient();
       var request = await httpClient.getUrl(Uri.parse('$URL/sales?year=$year'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
         this.posts = Sales.fromJsonArray(json);
         this.loading = false;
         this.error = false;

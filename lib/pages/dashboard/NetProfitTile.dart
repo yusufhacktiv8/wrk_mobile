@@ -59,8 +59,8 @@ class _NetProfitTileState extends State<NetProfitTile> {
       var request =
       await httpClient.getUrl(Uri.parse('$URL/netprofit?year=${dateTime.year}&month=${dateTime.month}'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
         return NetProfit.fromJson(json);
       } else {
         return NetProfit();

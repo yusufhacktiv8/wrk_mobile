@@ -84,8 +84,8 @@ class _SmwgPageState extends State<SmwgPage> {
       var request = await httpClient.getUrl(Uri.parse('$URL/smwgitems/bysmwg?'
           'year=$year&month=$month&smwgType=$smwgType'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
         this.smwgItems = SmwgItem.fromJsonArray(json);
       }
       else{

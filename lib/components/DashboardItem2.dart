@@ -66,8 +66,8 @@ class _DashboardItemState2 extends State<DashboardItem2> {
       var httpClient = new HttpClient();
       var request = await httpClient.getUrl(Uri.parse('$URL/projects/countbytype?projectType=$projectType'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
         this.projectCount = ProjectCount.fromJsonArray(json);
       }
       else{

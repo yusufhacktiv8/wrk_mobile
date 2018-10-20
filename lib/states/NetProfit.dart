@@ -59,8 +59,8 @@ class NetProfitState{
       var httpClient = new HttpClient();
       var request = await httpClient.getUrl(Uri.parse('$URL/netprofit?year=$year&month=$month'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
         this.netProfit = NetProfit.fromJsonArray(json);
         this.loading = false;
         this.error = false;

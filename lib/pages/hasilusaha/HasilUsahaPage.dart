@@ -105,8 +105,8 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
       var request = await httpClient.getUrl(Uri.parse('$URL/revenues/byyearmonth?'
           'year=$year&month=$month'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var jsonString = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var jsonString = await response.transform(utf8.decoder).join();
         Map<String, dynamic> revenueData = json.decode(jsonString);
         _data = json.decode(revenueData["data"]);
       }

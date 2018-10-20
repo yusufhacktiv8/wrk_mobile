@@ -43,8 +43,8 @@ class ScoreCardState{
       var httpClient = new HttpClient();
       var request = await httpClient.getUrl(Uri.parse(URL + '/scorecard?year=2018&month=1'));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
         this.project = ScoreCard.fromJsonArray(json);
         this.loading = false;
         this.error = false;
