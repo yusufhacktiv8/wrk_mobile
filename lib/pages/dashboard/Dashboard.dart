@@ -41,6 +41,7 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
     _selectedDateTime = new DateTime(2018, 1);
     eventBus.fire(MonthYearChangedEvent(DateTime(2018, 1)));
+    eventBus.fire(YearChangedEvent(DateTime(2018, 1)));
     eventBus.on<MonthYearChangedEvent>().listen((event) {
       this._selectedDateTime = event.dateTime;
 //      setState(() {
@@ -96,7 +97,9 @@ class _DashboardState extends State<Dashboard> {
         ),
         body: Column(
           children: <Widget>[
-            MonthSelector(),
+            MonthSelector(
+              selectedDateTime: this._selectedDateTime,
+            ),
             Expanded(
               child: StaggeredGridView.count(
                 crossAxisCount: 2,
