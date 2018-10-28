@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'dart:async';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 import 'package:dashboard/events.dart';
@@ -17,6 +18,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  Timer _timer;
   final fn = new NumberFormat("#,###.00");
   var plan = 0.0;
   var year = 2018;
@@ -39,12 +41,17 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
-    _selectedDateTime = new DateTime(2018, 1);
+    final now = DateTime.now();
+    _selectedDateTime = DateTime(now.year, now.month - 1, now.day);
     eventBus.on<MonthYearChangedEvent>().listen((event) {
       this._selectedDateTime = event.dateTime;
     });
-    eventBus.fire(MonthYearChangedEvent(DateTime(2018, 1)));
-    eventBus.fire(YearChangedEvent(DateTime(2018, 1)));
+    _timer = new Timer(const Duration(milliseconds: 1500), () {
+      setState(() {
+        eventBus.fire(MonthYearChangedEvent(_selectedDateTime));
+        eventBus.fire(YearChangedEvent(_selectedDateTime));
+      });
+    });
   }
 
   @override
