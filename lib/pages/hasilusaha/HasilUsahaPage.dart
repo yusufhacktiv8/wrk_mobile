@@ -102,7 +102,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> with SingleTickerProvid
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.only(left: 15.0, bottom: 10.0),
-                        child: Text(this.title, style: TextStyle(color: Colors.white, fontSize: 18.0),),
+                        child: Text(this.title, style: TextStyle(color: Colors.white, fontSize: 19.0),),
                       ),
                     ),
                     Container(
@@ -119,8 +119,8 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> with SingleTickerProvid
         body: TabBarView(
           controller: _tabController,
           children: <Widget>[
-            HasilUsahaItem(),
-            HasilUsahaItem(),
+            HasilUsahaItem(data: _data, dataRoot: "kontrakDihadapi",),
+            HasilUsahaItem(data: _data, dataRoot: "penjualan"),
           ],
         ),
       ),

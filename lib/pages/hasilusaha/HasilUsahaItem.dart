@@ -29,7 +29,7 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
                     children: <Widget>[
                       Material(
                         borderRadius: BorderRadius.circular(8.0),
-                        color: Colors.teal,
+                        color: Colors.amber,
                         child: Container(
                             padding: EdgeInsets.all(10.0),
                             child: Text("Pesanan Tahun Lalu",
@@ -43,7 +43,7 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
                   Padding(
                     padding: EdgeInsets.all(5.0),
                   ),
-                  HasilUsahaSubItem(),
+                  HasilUsahaSubItem(data: widget.data != null ? widget.data[widget.dataRoot]["pesananTahunLalu"] : null),
                   Padding(
                     padding: EdgeInsets.all(10.0),
                   ),
@@ -51,7 +51,7 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
                     children: <Widget>[
                       Material(
                         borderRadius: BorderRadius.circular(8.0),
-                        color: Colors.amber,
+                        color: Colors.blue,
                         child: Container(
                             padding: EdgeInsets.all(10.0),
                             child: Text("Pesanan Baru",
@@ -65,7 +65,7 @@ class HasilUsahaItemState extends State<HasilUsahaItem> {
                   Padding(
                     padding: EdgeInsets.all(5.0),
                   ),
-                  HasilUsahaSubItem(),
+                  HasilUsahaSubItem(data: widget.data != null ? widget.data[widget.dataRoot]["pesananBaru"] : null),
                 ],
               ),
             ),
