@@ -24,11 +24,41 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> with SingleTickerProvid
   DateTime _selectedDateTime;
   Map<String, dynamic> _data;
   TabController _tabController;
+  String title = "Kontrak Dihadapi";
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: choices.length);
+    _tabController.addListener(() {
+      String title = "";
+      switch (_tabController.index) {
+        case 0:
+          title = "Kontrak Dihadapi";
+          break;
+        case 1:
+          title = "Penjualan";
+          break;
+        case 2:
+          title = "Laba Kotor";
+          break;
+        case 3:
+          title = "Biaya Usaha";
+          break;
+        case 4:
+          title = "Bunga";
+          break;
+        case 5:
+          title = "Laba Rugi Lain - lain";
+          break;
+        default:
+          title = "-";
+
+      }
+      setState(() {
+        this.title = title;
+      });
+    });
     _selectedDateTime = widget.selectedDateTime;
     _getRevenues();
   }
@@ -61,16 +91,27 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> with SingleTickerProvid
             },
           ),
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(78.0),
+            preferredSize: const Size.fromHeight(58.0),
             child: Column(children: <Widget>[
               MonthSelector(parentContext: context, textColor: Colors.white70, selectedDateTime: widget.selectedDateTime,),
               Theme(
                 data: Theme.of(context).copyWith(accentColor: Colors.white),
-                child: Container(
-                  height: 48.0,
-                  alignment: Alignment.center,
-                  child: TabPageSelector(controller: _tabController),
-                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 15.0, bottom: 10.0),
+                        child: Text(this.title, style: TextStyle(color: Colors.white, fontSize: 18.0),),
+                      ),
+                    ),
+                    Container(
+                      height: 28.0,
+                      padding: EdgeInsets.only(right: 20.0, bottom: 5.0),
+                      alignment: Alignment.centerRight,
+                      child: TabPageSelector(controller: _tabController),
+                    ),
+                ],),
               ),
             ],),
           ),
