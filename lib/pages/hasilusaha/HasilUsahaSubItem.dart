@@ -48,140 +48,179 @@ class HasilUsahaSubItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Card(
-          child: ListTile(
-            title: Text("Extern", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
-            subtitle: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text("RKAP ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(rkapExternText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text("Ra s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(raExternText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text("Ri s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(riExternText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text("Prognosa ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(prognosaExternText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      ],
-                    )
-                  ],
-                ),
-              ],
+          child: Container(
+          padding: EdgeInsets.all(8.0),
+            child: ListTile(
+              title: Text("Extern", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
+              subtitle: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text("RKAP ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                          Text(rkapExternText, style: TextStyle(fontSize: 18.0)),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Text("Ra s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                          Text(raExternText, style: TextStyle(fontSize: 18.0)),
+                        ],
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text("Ri s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                          Text(riExternText, style: TextStyle(fontSize: 18.0)),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Text("Prognosa ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                          Text(prognosaExternText, style: TextStyle(fontSize: 18.0)),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
+          )
         ),
         Padding(
           padding: EdgeInsets.all(10.0),
         ),
         Card(
-          child: ListTile(
-            title: Text("JO", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
-            subtitle: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              child: ListTile(
+                title: Text("JO", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
+                subtitle: Column(
                   children: <Widget>[
-                    Column(
+                    Padding(
+                      padding: EdgeInsets.all(4.0),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("RKAP ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(rkapJOText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("RKAP ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            Text(rkapJOText, style: TextStyle(fontSize: 18.0)),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text("Ra s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            Text(raJOText, style: TextStyle(fontSize: 18.0)),
+                          ],
+                        )
                       ],
                     ),
-                    Column(
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("Ra s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(raJOText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text("Ri s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(riJOText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("Ri s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            Text(riJOText, style: TextStyle(fontSize: 18.0)),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text("Prognosa ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            Text(prognosaJOText, style: TextStyle(fontSize: 18.0)),
+                          ],
+                        )
                       ],
                     ),
-                    Column(
-                      children: <Widget>[
-                        Text("Prognosa ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(prognosaJOText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      ],
-                    )
                   ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            )
         ),
         Padding(
           padding: EdgeInsets.all(10.0),
         ),
         Card(
-          child: ListTile(
-            title: Text("Intern", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
-            subtitle: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              child: ListTile(
+                title: Text("Intern", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
+                subtitle: Column(
                   children: <Widget>[
-                    Column(
+                    Padding(
+                      padding: EdgeInsets.all(4.0),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("RKAP ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(rkapInternText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("RKAP ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            Text(rkapInternText, style: TextStyle(fontSize: 18.0)),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text("Ra s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            Text(raInternText, style: TextStyle(fontSize: 18.0)),
+                          ],
+                        )
                       ],
                     ),
-                    Column(
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("Ra s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(raInternText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text("Ri s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(riInternText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("Ri s/d Saat Ini ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            Text(riInternText, style: TextStyle(fontSize: 18.0)),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text("Prognosa ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            Text(prognosaInternText, style: TextStyle(fontSize: 18.0)),
+                          ],
+                        )
                       ],
                     ),
-                    Column(
-                      children: <Widget>[
-                        Text("Prognosa ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(prognosaInternText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      ],
-                    )
                   ],
                 ),
-              ],
-            ),
-          ),
-        )
+              ),
+            )
+        ),
       ],
     );
   }
