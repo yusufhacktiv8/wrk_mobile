@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import 'package:intl/intl.dart';
+import 'package:dashboard/events.dart';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/pages/dashboard/MonthSelector.dart';
 import 'package:dashboard/DotsIndicator.dart';
@@ -29,6 +30,10 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
+    eventBus.on<MonthYearChangedEvent>().listen((event) {
+      this._selectedDateTime = event.dateTime;
+      _getRevenues();
+    });
     _tabController = TabController(vsync: this, length: choices.length);
     _tabController.addListener(() {
       String title = "";
