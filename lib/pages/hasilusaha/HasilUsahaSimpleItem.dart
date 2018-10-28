@@ -24,11 +24,6 @@ class HasilUsahaSimpleItem extends StatelessWidget {
 
     return Column(
       children: <Widget>[
-        Padding(
-          padding: new EdgeInsets.all(10.0),
-          child: Text(title,
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[

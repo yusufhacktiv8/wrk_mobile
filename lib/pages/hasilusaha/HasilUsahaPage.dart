@@ -35,7 +35,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage>
 //      this._selectedDateTime = event.dateTime;
 //      _getRevenues();
 //    });
-    _tabController = TabController(vsync: this, length: 2);
+    _tabController = TabController(vsync: this, length: 4);
     _tabController.addListener(() {
       String title = "";
       switch (_tabController.index) {
@@ -156,6 +156,11 @@ class _HasilUsahaPageState extends State<HasilUsahaPage>
                             data: snapshot.data,
                             dataRoot: "penjualan"
                         ),
+                        HasilUsahaItem(
+                            data: snapshot.data,
+                            dataRoot: "labaKotor"
+                        ),
+                        HasilUsahaSimpleItem(data: snapshot.data, dataRoot: "biayaUsaha",)
                       ],
                     );
               }
