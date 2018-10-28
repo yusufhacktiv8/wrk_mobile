@@ -8,8 +8,9 @@ class MonthSelector extends StatefulWidget {
   BuildContext parentContext;
   Color textColor;
   DateTime selectedDateTime;
+  ValueSetter onChange;
 
-  MonthSelector({Key key, this.parentContext, this.textColor, this.selectedDateTime}) : super(key: key);
+  MonthSelector({Key key, this.parentContext, this.textColor, this.selectedDateTime, this.onChange}) : super(key: key);
   @override
   _MonthSelectorState createState() => _MonthSelectorState();
 }
@@ -106,8 +107,8 @@ class _MonthSelectorState extends State<MonthSelector> {
                 hideHeader: true,
                 title: new Text("Select Month"),
                 onConfirm: (Picker picker, List value) {
-                  print(value.toString());
-                  print(picker.getSelectedValues());
+//                  print(value.toString());
+//                  print(picker.getSelectedValues());
                   final month = picker.getSelectedValues()[0];
                   final year = picker.getSelectedValues()[1];
                   var dateTime = DateTime(int.parse(year), _getMonthFormString(month));
@@ -117,6 +118,9 @@ class _MonthSelectorState extends State<MonthSelector> {
                   setState(() {
                     this.selectedDateTime = dateTime;
                   });
+                  if (widget.onChange != null) {
+                    widget.onChange(dateTime);
+                  }
                 }
             ).showDialog(widget.parentContext != null ? widget.parentContext : context);
           },
