@@ -6,10 +6,9 @@ import 'package:dashboard/pages/hasilusaha/HasilUsahaPage.dart';
 const TITLE = 'Laba Bersih';
 
 class DashboardItem extends StatefulWidget {
-  final int month;
-  final int year;
+  final DateTime selectedDateTime;
 
-  DashboardItem({Key key, this.month, this.year}) : super(key: key);
+  DashboardItem({Key key, this.selectedDateTime}) : super(key: key);
 
   @override
   _DashboardItemState createState() => new _DashboardItemState();
@@ -22,7 +21,7 @@ class _DashboardItemState extends State<DashboardItem> {
   @override
   void initState() {
     super.initState();
-    _getNetProfits(widget.month, widget.year);
+    _getNetProfits(widget.selectedDateTime.month, widget.selectedDateTime.year);
     eventBus.on<MonthYearChangedEvent>().listen((event) {
       _getNetProfits(event.dateTime.month, event.dateTime.year);
     });
@@ -64,10 +63,7 @@ class _DashboardItemState extends State<DashboardItem> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HasilUsahaPage(
-              year: widget.year,
-              month: widget.month,
-          )),
+          MaterialPageRoute(builder: (context) => HasilUsahaPage(selectedDateTime: widget.selectedDateTime)),
         );
       },
 

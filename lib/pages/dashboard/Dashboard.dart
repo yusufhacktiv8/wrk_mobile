@@ -8,6 +8,7 @@ import 'package:dashboard/pages/dashboard/OmzetChart.dart';
 import 'package:dashboard/pages/dashboard/ChartLabel.dart';
 import 'package:dashboard/pages/dashboard/NetProfitTile.dart';
 import 'package:dashboard/pages/dashboard/ProjectCountTile.dart';
+import 'package:dashboard/pages/hasilusaha/HasilUsahaPage.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -33,18 +34,19 @@ class _DashboardState extends State<Dashboard> {
   ];
   String actualDropdown = chartDropdownItems[0];
   int actualChart = 0;
-  DateTime _selectedMonth;
+  DateTime _selectedDateTime;
 
   @override
   void initState() {
     super.initState();
-    _selectedMonth = new DateTime(2018, 1);
+    _selectedDateTime = new DateTime(2018, 1);
     eventBus.fire(MonthYearChangedEvent(DateTime(2018, 1)));
-//    eventBus.on<MonthYearChangedEvent>().listen((event) {
+    eventBus.on<MonthYearChangedEvent>().listen((event) {
+      this._selectedDateTime = event.dateTime;
 //      setState(() {
 //        this.year = event.monthYear.year;
 //      });
-//    });
+    });
   }
 
   @override
@@ -174,6 +176,12 @@ class _DashboardState extends State<Dashboard> {
                                     )))
                           ]),
                     ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HasilUsahaPage(selectedDateTime: this._selectedDateTime,)),
+                        );
+                      }
                   ),
                   _buildTile(
                     Padding(

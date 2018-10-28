@@ -2,91 +2,88 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
+import 'package:intl/intl.dart';
 import 'package:dashboard/Constant.dart';
-import 'package:month_picker_strip/month_picker_strip.dart';
+import 'package:dashboard/pages/dashboard/MonthSelector.dart';
 import 'package:dashboard/DotsIndicator.dart';
 import 'package:dashboard/pages/hasilusaha/HasilUsahaItem.dart';
 import 'package:dashboard/pages/hasilusaha/HasilUsahaSimpleItem.dart';
 
 class HasilUsahaPage extends StatefulWidget {
-  final int year, month, projectType;
+  final DateTime selectedDateTime, projectType;
 
-  HasilUsahaPage({Key key, this.year, this.month, this.projectType})
+  HasilUsahaPage({Key key, this.selectedDateTime, this.projectType})
       : super(key: key);
 
   @override
   _HasilUsahaPageState createState() => new _HasilUsahaPageState();
 }
 
-class _HasilUsahaPageState extends State<HasilUsahaPage> {
-  DateTime _selectedMonth;
+class _HasilUsahaPageState extends State<HasilUsahaPage> with SingleTickerProviderStateMixin{
+  final fn = new NumberFormat("#,###.00");
+  DateTime _selectedDateTime;
   Map<String, dynamic> _data;
-  final _controller = new PageController();
-
-  static const _kDuration = const Duration(milliseconds: 300);
-
-  static const _kCurve = Curves.ease;
+  TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _selectedMonth = new DateTime(widget.year, widget.month);
+    _tabController = TabController(vsync: this, length: choices.length);
+    _selectedDateTime = widget.selectedDateTime;
     _getRevenues();
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _nextPage(int delta) {
+    final int newIndex = _tabController.index + delta;
+    if (newIndex < 0 || newIndex >= _tabController.length) return;
+    _tabController.animateTo(newIndex);
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Hasil Usaha'),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: <Widget>[
-          MonthStrip(
-            format: 'MMM yyyy',
-            from: new DateTime(2016, 4),
-            to: new DateTime(2018, 5),
-            initialMonth: _selectedMonth,
-            height: 58.0,
-            viewportFraction: 0.45,
-            onMonthChanged: (v) {
-              setState(() {
-                _selectedMonth = v;
-                _getRevenues();
-              });
-            },
-            normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),
-            selectedTextStyle:
-                TextStyle(fontSize: 20.0, color: Colors.blueAccent),
-          ),
-          DotsIndicator(
-            color: Colors.blueGrey,
-            itemCount: 6,
-            controller: _controller,
-            onPageSelected: (int page) {
-              if (!mounted) return;
-              _controller.animateToPage(
-                page,
-                duration: _kDuration,
-                curve: _kCurve,
-              );
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Hasil Usaha'),
+          centerTitle: true,
+          leading: IconButton(
+            tooltip: 'Previous page',
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
             },
           ),
-          Expanded(
-              child: PageView(
-            physics: new AlwaysScrollableScrollPhysics(),
-            controller: _controller,
-            children: <Widget>[
-              HasilUsahaItem(title: "Kontrak Dihadapi", data: _data, dataRoot: "kontrakDihadapi",),
-              HasilUsahaItem(title: "Penjualan", data: _data, dataRoot: "penjualan",),
-              HasilUsahaItem(title: "Laba Kotor", data: _data, dataRoot: "labaKotor",),
-              HasilUsahaSimpleItem(title: "Biaya Usaha", data: _data, dataRoot: "biayaUsaha",),
-              HasilUsahaSimpleItem(title: "Bunga", data: _data, dataRoot: "bunga",),
-              HasilUsahaSimpleItem(title: "Laba Rugi Lain - Lain", data: _data, dataRoot: "labaRugiLain",),
-            ],
-          ))
-        ],
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(78.0),
+            child: Column(children: <Widget>[
+              MonthSelector(parentContext: context, textColor: Colors.white70, selectedDateTime: widget.selectedDateTime,),
+              Theme(
+                data: Theme.of(context).copyWith(accentColor: Colors.white),
+                child: Container(
+                  height: 48.0,
+                  alignment: Alignment.center,
+                  child: TabPageSelector(controller: _tabController),
+                ),
+              ),
+            ],),
+          ),
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: choices.map((Choice choice) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ChoiceCard(choice: choice),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
@@ -94,7 +91,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
   _getRevenues() async {
     if (!mounted) return;
 
-    await this.getFromApi(_selectedMonth.month, _selectedMonth.year);
+    await this.getFromApi(_selectedDateTime.month, _selectedDateTime.year);
     setState(() {
     });
   }
@@ -118,3 +115,44 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> {
     }
   }
 }
+
+class Choice {
+  const Choice({this.title, this.icon});
+
+  final String title;
+  final IconData icon;
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: 'CAR', icon: Icons.directions_car),
+  const Choice(title: 'BICYCLE', icon: Icons.directions_bike),
+  const Choice(title: 'BOAT', icon: Icons.directions_boat),
+  const Choice(title: 'BUS', icon: Icons.directions_bus),
+  const Choice(title: 'TRAIN', icon: Icons.directions_railway),
+  const Choice(title: 'WALK', icon: Icons.directions_walk),
+];
+
+class ChoiceCard extends StatelessWidget {
+  const ChoiceCard({Key key, this.choice}) : super(key: key);
+
+  final Choice choice;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle textStyle = Theme.of(context).textTheme.display1;
+    return Card(
+      color: Colors.white,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(choice.icon, size: 128.0, color: textStyle.color),
+            Text(choice.title, style: textStyle),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

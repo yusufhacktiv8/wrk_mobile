@@ -15,12 +15,12 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
 
-  DateTime _selectedMonth;
+  DateTime _selectedDateTime;
 
   @override
   void initState() {
     super.initState();
-    _selectedMonth = new DateTime(2018, 1);
+    _selectedDateTime = new DateTime(2018, 1);
   }
   
   @override
@@ -35,20 +35,20 @@ class _DashboardState extends State<Dashboard> {
             format: 'MMM yyyy',
             from: new DateTime(2016, 4),
             to: new DateTime(2018, 5),
-            initialMonth: _selectedMonth,
+            initialMonth: _selectedDateTime,
             height: 58.0,
             viewportFraction: 0.45,
             onMonthChanged: (v) {
               setState(() {
-                _selectedMonth = v;
+                _selectedDateTime = v;
                 eventBus.fire(new MonthYearChangedEvent(v));
               });
             },
             normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),
             selectedTextStyle: TextStyle(fontSize: 20.0, color: Colors.blueAccent),
           ),
-          new MainCharts(year: _selectedMonth.year),
-          DashboardItem(month: _selectedMonth.month, year: _selectedMonth.year),
+          new MainCharts(year: _selectedDateTime.year),
+          DashboardItem(selectedDateTime: _selectedDateTime,),
           Divider(height: 1.0, color: Colors.grey,),
           DashboardItem2(projectType: 1, title: 'Kons & Fab',),
           Divider(height: 1.0, color: Colors.grey,),

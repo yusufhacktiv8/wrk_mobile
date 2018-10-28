@@ -5,6 +5,11 @@ import 'package:flutter_picker/flutter_picker.dart';
 import 'package:dashboard/events.dart';
 
 class MonthSelector extends StatefulWidget {
+  BuildContext parentContext;
+  Color textColor;
+  DateTime selectedDateTime;
+
+  MonthSelector({Key key, this.parentContext, this.textColor, this.selectedDateTime}) : super(key: key);
   @override
   _MonthSelectorState createState() => _MonthSelectorState();
 }
@@ -70,7 +75,7 @@ class _MonthSelectorState extends State<MonthSelector> {
   @override
   void initState() {
     super.initState();
-    this.selectedDateTime = DateTime.now();
+    this.selectedDateTime = widget.selectedDateTime != null ? widget.selectedDateTime : DateTime.now();
     eventBus.on<MonthYearChangedEvent>().listen((event) {
       setState(() {
         this.selectedDateTime = event.dateTime;
@@ -92,7 +97,7 @@ class _MonthSelectorState extends State<MonthSelector> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
                 fontSize: 18.0,
-                color: Colors.lightBlue),
+                color: widget.textColor != null ? widget.textColor : Colors.lightBlue),
           ),
           onPressed: () {
             new Picker(
@@ -113,7 +118,7 @@ class _MonthSelectorState extends State<MonthSelector> {
                     this.selectedDateTime = dateTime;
                   });
                 }
-            ).showDialog(context);
+            ).showDialog(widget.parentContext != null ? widget.parentContext : context);
           },
         ),
       ],
