@@ -78,9 +78,11 @@ class _MonthSelectorState extends State<MonthSelector> {
     super.initState();
     this.selectedDateTime = widget.selectedDateTime != null ? widget.selectedDateTime : DateTime.now();
     eventBus.on<MonthYearChangedEvent>().listen((event) {
-      setState(() {
-        this.selectedDateTime = event.dateTime;
-      });
+      if (mounted) {
+        setState(() {
+          this.selectedDateTime = event.dateTime;
+        });
+      }
     });
   }
 

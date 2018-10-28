@@ -40,14 +40,11 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     super.initState();
     _selectedDateTime = new DateTime(2018, 1);
-    eventBus.fire(MonthYearChangedEvent(DateTime(2018, 1)));
-    eventBus.fire(YearChangedEvent(DateTime(2018, 1)));
     eventBus.on<MonthYearChangedEvent>().listen((event) {
       this._selectedDateTime = event.dateTime;
-//      setState(() {
-//        this.year = event.monthYear.year;
-//      });
     });
+    eventBus.fire(MonthYearChangedEvent(DateTime(2018, 1)));
+    eventBus.fire(YearChangedEvent(DateTime(2018, 1)));
   }
 
   @override

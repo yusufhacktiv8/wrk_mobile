@@ -3,10 +3,8 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'package:dashboard/events.dart';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/pages/dashboard/MonthSelector.dart';
-import 'package:dashboard/DotsIndicator.dart';
 import 'package:dashboard/pages/hasilusaha/HasilUsahaItem.dart';
 import 'package:dashboard/pages/hasilusaha/HasilUsahaSimpleItem.dart';
 
@@ -35,7 +33,7 @@ class _HasilUsahaPageState extends State<HasilUsahaPage>
 //      this._selectedDateTime = event.dateTime;
 //      _getRevenues();
 //    });
-    _tabController = TabController(vsync: this, length: 4);
+    _tabController = TabController(vsync: this, length: 6);
     _tabController.addListener(() {
       String title = "";
       switch (_tabController.index) {
@@ -119,9 +117,9 @@ class _HasilUsahaPageState extends State<HasilUsahaPage>
                       ),
                       Container(
                         height: 28.0,
-                        padding: EdgeInsets.only(right: 20.0, bottom: 5.0),
+                        padding: EdgeInsets.only(right: 15.0, bottom: 5.0),
                         alignment: Alignment.centerRight,
-                        child: TabPageSelector(controller: _tabController),
+                        child: TabPageSelector(controller: _tabController, indicatorSize: 9.0,),
                       ),
                     ],
                   ),
@@ -160,7 +158,9 @@ class _HasilUsahaPageState extends State<HasilUsahaPage>
                             data: snapshot.data,
                             dataRoot: "labaKotor"
                         ),
-                        HasilUsahaSimpleItem(data: snapshot.data, dataRoot: "biayaUsaha",)
+                        HasilUsahaSimpleItem(data: snapshot.data, dataRoot: "biayaUsaha",),
+                        HasilUsahaSimpleItem(data: snapshot.data, dataRoot: "bunga",),
+                        HasilUsahaSimpleItem(data: snapshot.data, dataRoot: "labaRugiLain",)
                       ],
                     );
               }
