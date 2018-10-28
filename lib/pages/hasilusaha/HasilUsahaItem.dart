@@ -12,87 +12,65 @@ class HasilUsahaItem extends StatefulWidget {
   HasilUsahaItemState createState() => new HasilUsahaItemState();
 }
 
-class NewItem {
-  bool isExpanded;
-
-  NewItem(this.isExpanded);
-
-}
-
 class HasilUsahaItemState extends State<HasilUsahaItem> {
-
-  List<NewItem> items = <NewItem>[
-    new NewItem(true),
-    new NewItem(true),
-    //give all your items here
-  ];
-
+  
   Widget build(BuildContext context) {
     return ListView(
-      children: [
-        Padding(
-          padding: new EdgeInsets.all(10.0),
-          child: Text(widget.title,
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
-        ),
-        new Padding(
-          padding: new EdgeInsets.all(10.0),
-          child: new ExpansionPanelList(
-            expansionCallback: (int index, bool isExpanded) {
-              setState(() {
-                items[index].isExpanded = !items[index].isExpanded;
-              });
-            },
-            children: <ExpansionPanel>[
-              ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return new ListTile(
-//                      leading: item.iconpic,
-                      title: new Text(
-                    'Pesanan Tahun Lalu',
-                    textAlign: TextAlign.left,
-                    style: new TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ));
-                },
-                isExpanded: items[0].isExpanded,
-                body: Padding(
-                    padding: new EdgeInsets.all(20.0),
-                    child: new Column(children: <Widget>[
-                      Container(
-                        height: 200.0,
-                        child: HasilUsahaSubItem(data: widget.data != null ? widget.data[widget.dataRoot]["pesananTahunLalu"] : null),
-                      )
-                    ])),
-              ),
-              ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return new ListTile(
-//                      leading: item.iconpic,
-                      title: new Text(
-                        'Pesanan Baru',
-                        textAlign: TextAlign.left,
-                        style: new TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(10.0),
+          child: Card(
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Material(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.teal,
+                        child: Container(
+                            padding: EdgeInsets.all(10.0),
+                            child: Text("Pesanan Tahun Lalu",
+                                style: TextStyle(color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 19.0))
                         ),
-                      ));
-                },
-                isExpanded: items[1].isExpanded,
-                body: Padding(
-                    padding: new EdgeInsets.all(20.0),
-                    child: new Column(children: <Widget>[
-                      Container(
-                        height: 200.0,
-                        child: HasilUsahaSubItem(data: widget.data != null ? widget.data[widget.dataRoot]["pesananBaru"] : null),
-                      )
-                    ])),
-              )
-            ],
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
+                  ),
+                  HasilUsahaSubItem(),
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Material(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.amber,
+                        child: Container(
+                            padding: EdgeInsets.all(10.0),
+                            child: Text("Pesanan Baru",
+                                style: TextStyle(color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 19.0))
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
+                  ),
+                  HasilUsahaSubItem(),
+                ],
+              ),
+            ),
           ),
-        )
+        ),
       ],
     );
   }

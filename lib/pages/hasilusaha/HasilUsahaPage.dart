@@ -118,12 +118,10 @@ class _HasilUsahaPageState extends State<HasilUsahaPage> with SingleTickerProvid
         ),
         body: TabBarView(
           controller: _tabController,
-          children: choices.map((Choice choice) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ChoiceCard(choice: choice),
-            );
-          }).toList(),
+          children: <Widget>[
+            HasilUsahaItem(),
+            HasilUsahaItem(),
+          ],
         ),
       ),
     );

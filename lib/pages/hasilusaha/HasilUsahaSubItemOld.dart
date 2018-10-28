@@ -44,8 +44,7 @@ class HasilUsahaSubItem extends StatelessWidget {
     String riInternText = riIntern != null ? fn.format((riIntern as num).toDouble()) : "-";
     String prognosaInternText = prognosaIntern != null ? fn.format((prognosaIntern as num).toDouble()) : "-";
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return ListView(
       children: <Widget>[
         Card(
           child: ListTile(
@@ -90,9 +89,6 @@ class HasilUsahaSubItem extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.all(10.0),
-        ),
         Card(
           child: ListTile(
             title: Text("JO", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
@@ -135,9 +131,6 @@ class HasilUsahaSubItem extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(10.0),
         ),
         Card(
           child: ListTile(
