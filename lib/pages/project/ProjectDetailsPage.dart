@@ -73,6 +73,7 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
           ),
         ),
         body: Container(
+          padding: EdgeInsets.all(8.0),
           child: ListView(
             children: <Widget>[
               ProjectInfo(project: project),
