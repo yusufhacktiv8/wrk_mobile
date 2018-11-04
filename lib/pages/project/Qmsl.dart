@@ -17,7 +17,7 @@ class Qmsl extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           FlatButton(
-            textColor: const Color(0xFF35567D),
+            textColor: Colors.blue,
             child: Text("QMSL", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
             onPressed: () {
               Navigator.push(
@@ -31,7 +31,7 @@ class Qmsl extends StatelessWidget {
             },
           ),
           FlatButton(
-            textColor: const Color(0xFF35567D),
+            textColor: Colors.blue,
             child: Text("SHE Level", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
             onPressed: () {
               Navigator.push(
@@ -45,7 +45,7 @@ class Qmsl extends StatelessWidget {
             },
           ),
           FlatButton(
-            textColor: const Color(0xFF35567D),
+            textColor: Colors.blue,
             child: Text("5R", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
             onPressed: () {
               Navigator.push(

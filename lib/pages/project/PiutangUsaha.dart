@@ -12,20 +12,20 @@ class PiutangUsaha extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
-//        title: Text("Omzet Kontrak", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
-        subtitle: Column(
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text("Piutang Usaha ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                Text(projectProgress != null ?  fn.format(projectProgress.piutangUsaha) : "-", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                Text("Piutang Usaha ", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.black54)),
+                Text(projectProgress != null ?  fn.format(projectProgress.piutangUsaha) : "-", style: TextStyle(fontSize: 18.0)),
               ],
             ),
           ],
         ),
-      ),
+      ), 
     );
   }
 }

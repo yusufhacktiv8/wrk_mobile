@@ -77,12 +77,33 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
           child: ListView(
             children: <Widget>[
               ProjectInfo(project: project),
+              Padding(
+                padding: EdgeInsets.all(4.0),
+              ),
               OmzetKontrak(project: project),
+              Padding(
+                padding: EdgeInsets.all(4.0),
+              ),
               TimProyek(project: project),
+              Padding(
+                padding: EdgeInsets.all(4.0),
+              ),
               Progress(projectProgress: projectProgress),
+              Padding(
+                padding: EdgeInsets.all(4.0),
+              ),
               PiutangRetensi(projectProgress: projectProgress),
+              Padding(
+                padding: EdgeInsets.all(4.0),
+              ),
               PiutangUsaha(projectProgress: projectProgress),
+              Padding(
+                padding: EdgeInsets.all(4.0),
+              ),
               Persediaan(projectProgress: projectProgress),
+              Padding(
+                padding: EdgeInsets.all(4.0),
+              ),
               Qmsl(project: project, selectedDateTime: _selectedDateTime,),
             ],
           ),
