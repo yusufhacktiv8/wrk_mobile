@@ -37,21 +37,47 @@ class _SmwgPageState extends State<SmwgPage> {
     ),
     body: Column(
       children: <Widget>[
-        new MonthStrip(
-          format: 'MMM yyyy',
-          from: new DateTime(2016, 4),
-          to: new DateTime(2018, 5),
-          initialMonth: _selectedDateTime,
-          height: 58.0,
-          viewportFraction: 0.45,
-          onMonthChanged: (v) {
-            setState(() {
-              _selectedDateTime = v;
-              _getProjects();
-            });
-          },
-          normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),
-          selectedTextStyle: TextStyle(fontSize: 20.0, color: Colors.blueAccent),
+        Container(
+          child: Row (
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Expanded(
+                child: Material(
+                  color: Colors.amber,
+                  child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text("Uraian",
+                          style: TextStyle(color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 19.0))
+                  ),
+                ),),
+              Material(
+                color: Colors.blue,
+                child: Container(
+                  width: 75.0,
+                    padding: EdgeInsets.all(10.0),
+                    child: Text("Bobot",
+                        style: TextStyle(color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 19.0))
+                ),
+              ),
+              Material(
+                color: Colors.teal,
+                child: Container(
+                    width: 75.0,
+                    padding: EdgeInsets.all(10.0),
+                    child: Center(
+                        child: Text("Nilai",
+                            style: TextStyle(color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 19.0))
+                    )
+                ),
+              ),
+            ],
+          ),
         ),
         new Expanded(
           child: ListView.builder(
