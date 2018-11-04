@@ -6,9 +6,9 @@ import 'package:intl/intl.dart';
 class Qmsl extends StatelessWidget {
   final Project project;
   final f = new DateFormat('dd/MM/yyyy');
-  final int year, month;
+  final DateTime selectedDateTime;
 
-  Qmsl({Key key, this.project, this.month, this.year}) : super(key: key);
+  Qmsl({Key key, this.project, this.selectedDateTime}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,7 @@ class Qmsl extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => SmwgPage(
                   title: "QMSL",
-                    year: year,
-                    month: month,
+                  selectedDateTime: selectedDateTime,
                     smwgType: 1,
                 )),
               );
@@ -39,8 +38,7 @@ class Qmsl extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => SmwgPage(
                   title: "SHE Level",
-                  year: year,
-                  month: month,
+                  selectedDateTime: selectedDateTime,
                   smwgType: 2,
                 )),
               );
@@ -54,8 +52,7 @@ class Qmsl extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => SmwgPage(
                   title: "5R",
-                  year: year,
-                  month: month,
+                  selectedDateTime: selectedDateTime,
                   smwgType: 3,
                 )),
               );

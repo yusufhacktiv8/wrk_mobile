@@ -15,11 +15,13 @@ import 'package:dashboard/pages/project/PiutangRetensi.dart';
 import 'package:dashboard/pages/project/PiutangUsaha.dart';
 import 'package:dashboard/pages/project/Persediaan.dart';
 import 'package:dashboard/pages/project/Qmsl.dart';
+import 'package:dashboard/pages/dashboard/MonthSelector.dart';
 
 
 class ProjectDetailsPage extends StatefulWidget {
-  final int year, month, projectId;
-  ProjectDetailsPage({Key key, this.year, this.month, this.projectId}) : super(key: key);
+  final DateTime selectedDateTime;
+  final int projectId;
+  ProjectDetailsPage({Key key, this.selectedDateTime, this.projectId}) : super(key: key);
 
   @override
   _ProjectDetailsPageState createState() => new _ProjectDetailsPageState();
@@ -28,63 +30,109 @@ class ProjectDetailsPage extends StatefulWidget {
 class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
   Project project;
   ProjectProgress projectProgress;
-  DateTime _selectedMonth;
+  DateTime _selectedDateTime;
 
   @override
   void initState() {
     super.initState();
-    _selectedMonth = new DateTime(widget.year, widget.month);
+    _selectedDateTime = widget.selectedDateTime;
     _getProjectProgress();
     _getProject();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(appBar: new AppBar(
-      title: new Text('Project Details'),
-      centerTitle: true,
-    ),
-        body: Column(
-          children: <Widget>[
-            new MonthStrip(
-              format: 'MMM yyyy',
-              from: new DateTime(2016, 4),
-              to: new DateTime(2018, 5),
-              initialMonth: _selectedMonth,
-              height: 58.0,
-              viewportFraction: 0.45,
-              onMonthChanged: (v) {
-                setState(() {
-                  _selectedMonth = v;
-                  _getProjectProgress();
-                });
-              },
-              normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),
-              selectedTextStyle: TextStyle(fontSize: 20.0, color: Colors.blueAccent),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Project Details'),
+          centerTitle: true,
+          leading: IconButton(
+            tooltip: 'Previous page',
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(20.0),
+            child: Column(
+              children: <Widget>[
+                MonthSelector(
+                  parentContext: this.context,
+                  textColor: Colors.white70,
+                  selectedDateTime: widget.selectedDateTime,
+                  onChange: (selectedDateTime) {
+//                    this.setState(() {
+//                      this._selectedDateTime = selectedDateTime;
+//                    });
+                  },
+                ),
+              ],
             ),
-            new Expanded(
-                child: ListView(
-                  children: <Widget>[
-                    ProjectInfo(project: project),
-                    OmzetKontrak(project: project),
-                    TimProyek(project: project),
-                    Progress(projectProgress: projectProgress),
-                    PiutangRetensi(projectProgress: projectProgress),
-                    PiutangUsaha(projectProgress: projectProgress),
-                    Persediaan(projectProgress: projectProgress),
-                    Qmsl(project: project, year: _selectedMonth.year, month: _selectedMonth.month,),
-                  ],
-                )
-            )
-
-          ],
-        ));
+          ),
+        ),
+        body: Container(
+          child: ListView(
+            children: <Widget>[
+              ProjectInfo(project: project),
+              OmzetKontrak(project: project),
+              TimProyek(project: project),
+              Progress(projectProgress: projectProgress),
+              PiutangRetensi(projectProgress: projectProgress),
+              PiutangUsaha(projectProgress: projectProgress),
+              Persediaan(projectProgress: projectProgress),
+              Qmsl(project: project, selectedDateTime: _selectedDateTime,),
+            ],
+          ),
+        ),
+      ),
+    );
+//    return new Scaffold(appBar: new AppBar(
+//      title: new Text('Project Details'),
+//      centerTitle: true,
+//    ),
+//        body: Column(
+//          children: <Widget>[
+//            new MonthStrip(
+//              format: 'MMM yyyy',
+//              from: new DateTime(2016, 4),
+//              to: new DateTime(2018, 5),
+//              initialMonth: _selectedDateTime,
+//              height: 58.0,
+//              viewportFraction: 0.45,
+//              onMonthChanged: (v) {
+//                setState(() {
+//                  _selectedDateTime = v;
+//                  _getProjectProgress();
+//                });
+//              },
+//              normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),
+//              selectedTextStyle: TextStyle(fontSize: 20.0, color: Colors.blueAccent),
+//            ),
+//            new Expanded(
+//                child: ListView(
+//                  children: <Widget>[
+//                    ProjectInfo(project: project),
+//                    OmzetKontrak(project: project),
+//                    TimProyek(project: project),
+//                    Progress(projectProgress: projectProgress),
+//                    PiutangRetensi(projectProgress: projectProgress),
+//                    PiutangUsaha(projectProgress: projectProgress),
+//                    Persediaan(projectProgress: projectProgress),
+//                    Qmsl(project: project, selectedDateTime: _selectedDateTime,),
+//                  ],
+//                )
+//            )
+//
+//          ],
+//        ));
   }
 
   _getProjectProgress() async {
     if (!mounted) return;
 
-    await this.getProjectProgressFromApi(_selectedMonth.month, _selectedMonth.year, widget.projectId);
+    await this.getProjectProgressFromApi(_selectedDateTime.month, _selectedDateTime.year, widget.projectId);
     setState(() {
     });
   }

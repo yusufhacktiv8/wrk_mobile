@@ -10,8 +10,9 @@ import 'package:month_picker_strip/month_picker_strip.dart';
 
 class SmwgPage extends StatefulWidget {
   final String title;
-  final int year, month, smwgType;
-  SmwgPage({Key key, this.title, this.year, this.month, this.smwgType}) : super(key: key);
+  final DateTime selectedDateTime;
+  final int smwgType;
+  SmwgPage({Key key, this.title, this.selectedDateTime, this.smwgType}) : super(key: key);
 
   @override
   _SmwgPageState createState() => new _SmwgPageState();
@@ -19,12 +20,12 @@ class SmwgPage extends StatefulWidget {
 
 class _SmwgPageState extends State<SmwgPage> {
   List<SmwgItem> smwgItems = [];
-  DateTime _selectedMonth;
+  DateTime _selectedDateTime;
 
   @override
   void initState() {
     super.initState();
-    _selectedMonth = new DateTime(widget.year, widget.month);
+    _selectedDateTime = widget.selectedDateTime;
     _getProjects();
   }
 
@@ -40,12 +41,12 @@ class _SmwgPageState extends State<SmwgPage> {
           format: 'MMM yyyy',
           from: new DateTime(2016, 4),
           to: new DateTime(2018, 5),
-          initialMonth: _selectedMonth,
+          initialMonth: _selectedDateTime,
           height: 58.0,
           viewportFraction: 0.45,
           onMonthChanged: (v) {
             setState(() {
-              _selectedMonth = v;
+              _selectedDateTime = v;
               _getProjects();
             });
           },
@@ -73,7 +74,7 @@ class _SmwgPageState extends State<SmwgPage> {
   _getProjects() async {
     if (!mounted) return;
 
-    await this.getFromApi(_selectedMonth.month, _selectedMonth.year, widget.smwgType);
+    await this.getFromApi(_selectedDateTime.month, _selectedDateTime.year, widget.smwgType);
     setState(() {
     });
   }

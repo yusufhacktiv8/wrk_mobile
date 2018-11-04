@@ -14,9 +14,8 @@ class ProjectItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ProjectDetailsPage(
-                year: 2018,
-                month: 1,
+            MaterialPageRoute(builder: (_) => ProjectDetailsPage(
+                selectedDateTime: selectedDateTime,
                 projectId: projectProgress.project.id
             )),
           );
