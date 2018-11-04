@@ -10,6 +10,7 @@ import 'package:dashboard/pages/dashboard/ChartLabel.dart';
 import 'package:dashboard/pages/dashboard/NetProfitTile.dart';
 import 'package:dashboard/pages/dashboard/ProjectCountTile.dart';
 import 'package:dashboard/pages/hasilusaha/HasilUsahaPage.dart';
+import 'package:dashboard/pages/project/ProjectPage.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -220,6 +221,12 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ]),
                     ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProjectPage(selectedDateTime: this._selectedDateTime, projectType: 1,)),
+                        );
+                      }
                   ),
                   _buildTile(
                     Padding(
@@ -251,6 +258,12 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ]),
                     ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProjectPage(selectedDateTime: this._selectedDateTime, projectType: 2,)),
+                        );
+                      }
                   ),
                   _buildTile(
                     Padding(

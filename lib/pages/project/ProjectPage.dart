@@ -6,11 +6,12 @@ import 'dart:convert';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/models/ProjectProgress.dart';
 import 'package:dashboard/pages/project/ProjectItem.dart';
-import 'package:month_picker_strip/month_picker_strip.dart';
+import 'package:dashboard/pages/dashboard/MonthSelector.dart';
 
 class ProjectPage extends StatefulWidget {
-  final int year, month, projectType;
-  ProjectPage({Key key, this.year, this.month, this.projectType}) : super(key: key);
+  final DateTime selectedDateTime;
+  final int projectType;
+  ProjectPage({Key key, this.selectedDateTime, this.projectType}) : super(key: key);
 
   @override
   _ProjectPageState createState() => new _ProjectPageState();
@@ -18,63 +19,86 @@ class ProjectPage extends StatefulWidget {
 
 class _ProjectPageState extends State<ProjectPage> {
   List<ProjectProgress> projects = [];
-  DateTime _selectedMonth;
+  DateTime _selectedDateTime;
+  String _title = "";
 
   @override
   void initState() {
     super.initState();
-    _selectedMonth = new DateTime(widget.year, widget.month);
+    _title = widget.projectType == 1 ? 'Kons & Fab' : 'O & M';
+    _selectedDateTime = widget.selectedDateTime;
     _getProjects();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(appBar: new AppBar(
-      title: new Text('Project'),
-      centerTitle: true,
-    ),
-    body: Column(
-      children: <Widget>[
-        new MonthStrip(
-          format: 'MMM yyyy',
-          from: new DateTime(2016, 4),
-          to: new DateTime(2018, 5),
-          initialMonth: _selectedMonth,
-          height: 58.0,
-          viewportFraction: 0.45,
-          onMonthChanged: (v) {
-            setState(() {
-              _selectedMonth = v;
-              _getProjects();
-            });
-          },
-          normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),
-          selectedTextStyle: TextStyle(fontSize: 20.0, color: Colors.blueAccent),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(this._title),
+          centerTitle: true,
+          leading: IconButton(
+            tooltip: 'Previous page',
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(20.0),
+            child: Column(
+              children: <Widget>[
+                MonthSelector(
+                  parentContext: context,
+                  textColor: Colors.white70,
+                  selectedDateTime: widget.selectedDateTime,
+                  onChange: (selectedDateTime) {
+                    this.setState(() {
+                      this._selectedDateTime = selectedDateTime;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
-        new Expanded(
-          child: ListView.builder(
-            itemBuilder: (BuildContext context, int index) =>
-                Column(
-                  children: <Widget>[
-                    ProjectItem(projectProgress: projects[index]),
-                    Divider(height: 1.0, color: Colors.grey,),
-                  ],
-                )
-            ,
-            itemCount: projects.length,
-          )
-        )
-
-      ],
-    ));
+        body: FutureBuilder(
+            future: _getProjects(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              final data = snapshot.data;
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return Center(
+                    child: new CircularProgressIndicator(),
+                  );
+                default:
+                  if (snapshot.hasError)
+                    return Center(
+                      child: new CircularProgressIndicator(),
+                    );
+                  else
+                    return ListView.builder(
+                      itemBuilder: (BuildContext context, int index) =>
+                          Column(
+                            children: <Widget>[
+                              ProjectItem(projectProgress: data[index]),
+                              Divider(height: 1.0, color: Colors.grey,),
+                            ],
+                          )
+                      ,
+                      itemCount: data.length,
+                    );
+              }
+            }),
+      ),
+    );
   }
 
   _getProjects() async {
     if (!mounted) return;
 
-    await this.getFromApi(_selectedMonth.month, _selectedMonth.year, widget.projectType);
-    setState(() {
-    });
+    return await this.getFromApi(_selectedDateTime.month, _selectedDateTime.year, widget.projectType);
   }
 
   Future<void> getFromApi(int month, int year, int projectType) async{
@@ -85,13 +109,13 @@ class _ProjectPageState extends State<ProjectPage> {
       var response = await request.close();
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
-        this.projects = ProjectProgress.fromJsonArray(json);
+        return ProjectProgress.fromJsonArray(json);
       }
       else{
-        this.projects = [];
+        return [];
       }
     } catch (exception) {
-      this.projects = [];
+      return [];
     }
   }
 
