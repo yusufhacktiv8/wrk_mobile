@@ -25,6 +25,7 @@ class Qmsl extends StatelessWidget {
                 detailsPageContext,
                 MaterialPageRoute(builder: (context) => SmwgPage(
                   title: "QMSL",
+                  projectName: project.name,
                   selectedDateTime: selectedDateTime,
                     smwgType: 1,
                 )),
@@ -39,6 +40,7 @@ class Qmsl extends StatelessWidget {
                 detailsPageContext,
                 MaterialPageRoute(builder: (context) => SmwgPage(
                   title: "SHE Level",
+                  projectName: project.name,
                   selectedDateTime: selectedDateTime,
                   smwgType: 2,
                 )),
@@ -53,6 +55,7 @@ class Qmsl extends StatelessWidget {
                 detailsPageContext,
                 MaterialPageRoute(builder: (context) => SmwgPage(
                   title: "5R",
+                  projectName: project.name,
                   selectedDateTime: selectedDateTime,
                   smwgType: 3,
                 )),

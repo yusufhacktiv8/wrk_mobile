@@ -10,9 +10,10 @@ import 'package:dashboard/pages/dashboard/MonthSelector.dart';
 
 class SmwgPage extends StatefulWidget {
   final String title;
+  final String projectName;
   final DateTime selectedDateTime;
   final int smwgType;
-  SmwgPage({Key key, this.title, this.selectedDateTime, this.smwgType}) : super(key: key);
+  SmwgPage({Key key, this.title, this.projectName, this.selectedDateTime, this.smwgType}) : super(key: key);
 
   @override
   _SmwgPageState createState() => new _SmwgPageState();
@@ -44,7 +45,7 @@ class _SmwgPageState extends State<SmwgPage> {
             },
           ),
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(20.0),
+            preferredSize: const Size.fromHeight(58.0),
             child: Column(
               children: <Widget>[
                 MonthSelector(
@@ -56,6 +57,10 @@ class _SmwgPageState extends State<SmwgPage> {
                       this._selectedDateTime = selectedDateTime;
                     });
                   },
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 15.0),
+                  child: Text(widget.projectName, style:TextStyle(color: Colors.white, fontSize: 19.0)),
                 ),
               ],
             ),
