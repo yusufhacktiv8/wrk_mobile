@@ -4,8 +4,8 @@ import 'package:dashboard/pages/project/ProjectDetailsPage.dart';
 
 class ProjectItem extends StatelessWidget {
   final ProjectProgress projectProgress;
-
   final DateTime selectedDateTime;
+
   ProjectItem({Key key, this.projectProgress, this.selectedDateTime}) : super(key: key);
 
   @override
@@ -21,19 +21,14 @@ class ProjectItem extends StatelessWidget {
             )),
           );
         },
-        title: Container(padding: EdgeInsets.only(top: 8.0),
-          child: Text(projectProgress.project.name,
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),),
+        title: Text(projectProgress.project.name,
+            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
         subtitle: Column(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(4.0),
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Rencana",
                         style: TextStyle(
@@ -43,7 +38,6 @@ class ProjectItem extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text("Realisasi",
                         style: TextStyle(
@@ -54,14 +48,10 @@ class ProjectItem extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(4.0),
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Deviasi",
                         style: TextStyle(
@@ -71,7 +61,6 @@ class ProjectItem extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text("PDP",
                         style: TextStyle(
@@ -82,14 +71,10 @@ class ProjectItem extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(4.0),
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("BAD",
                         style: TextStyle(
@@ -99,7 +84,6 @@ class ProjectItem extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text("OK",
                         style: TextStyle(
@@ -110,14 +94,10 @@ class ProjectItem extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(4.0),
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Ra Progress",
                         style: TextStyle(
@@ -127,7 +107,6 @@ class ProjectItem extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text("Ri Progress",
                         style: TextStyle(
@@ -138,14 +117,10 @@ class ProjectItem extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(4.0),
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Piutang Usaha",
                         style: TextStyle(
@@ -155,7 +130,6 @@ class ProjectItem extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text("Piutang Retensi",
                         style: TextStyle(
@@ -166,14 +140,10 @@ class ProjectItem extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(4.0),
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Tagihan Bruto",
                         style: TextStyle(
@@ -183,7 +153,6 @@ class ProjectItem extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text("Persediaan",
                         style: TextStyle(
@@ -194,14 +163,10 @@ class ProjectItem extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(4.0),
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Cashflow",
                         style: TextStyle(
@@ -211,7 +176,6 @@ class ProjectItem extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text("Laba Kotor",
                         style: TextStyle(

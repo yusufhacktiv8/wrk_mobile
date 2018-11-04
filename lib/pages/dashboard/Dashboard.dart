@@ -203,7 +203,7 @@ class _DashboardState extends State<Dashboard> {
                                 shape: CircleBorder(),
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
-                                  child: Icon(Icons.assessment,
+                                  child: Icon(Icons.subtitles,
                                       color: Colors.white, size: 30.0),
                                 )),
                             Padding(padding: EdgeInsets.only(bottom: 16.0)),

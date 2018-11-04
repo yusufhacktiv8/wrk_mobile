@@ -78,17 +78,22 @@ class _ProjectPageState extends State<ProjectPage> {
                       child: new CircularProgressIndicator(),
                     );
                   else
-                    return ListView.builder(
-                      itemBuilder: (BuildContext context, int index) =>
-                          Column(
-                            children: <Widget>[
-                              ProjectItem(projectProgress: data[index]),
-                              Divider(height: 1.0, color: Colors.grey,),
-                            ],
-                          )
-                      ,
-                      itemCount: data.length,
-                    );
+                    if (data.length > 0) {
+                      return ListView.builder(
+                        itemBuilder: (BuildContext context, int index) =>
+                            Column(
+                              children: <Widget>[
+                                ProjectItem(projectProgress: data[index], selectedDateTime: _selectedDateTime),
+                                Divider(height: 1.0, color: Colors.grey,),
+                              ],
+                            )
+                        ,
+                        itemCount: data.length,
+                      );
+                    } else {
+                      return Center(child: Text("No Data"),);
+                    }
+
               }
             }),
       ),
