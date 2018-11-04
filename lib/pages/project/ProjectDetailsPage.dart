@@ -59,13 +59,13 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
             child: Column(
               children: <Widget>[
                 MonthSelector(
-                  parentContext: this.context,
+                  parentContext: context,
                   textColor: Colors.white70,
                   selectedDateTime: widget.selectedDateTime,
                   onChange: (selectedDateTime) {
-//                    this.setState(() {
-//                      this._selectedDateTime = selectedDateTime;
-//                    });
+                    this._selectedDateTime = selectedDateTime;
+                    _getProjectProgress();
+                    _getProject();
                   },
                 ),
               ],
@@ -110,45 +110,6 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
         ),
       ),
     );
-//    return new Scaffold(appBar: new AppBar(
-//      title: new Text('Project Details'),
-//      centerTitle: true,
-//    ),
-//        body: Column(
-//          children: <Widget>[
-//            new MonthStrip(
-//              format: 'MMM yyyy',
-//              from: new DateTime(2016, 4),
-//              to: new DateTime(2018, 5),
-//              initialMonth: _selectedDateTime,
-//              height: 58.0,
-//              viewportFraction: 0.45,
-//              onMonthChanged: (v) {
-//                setState(() {
-//                  _selectedDateTime = v;
-//                  _getProjectProgress();
-//                });
-//              },
-//              normalTextStyle: TextStyle(fontSize: 16.0, color: Colors.blueGrey),
-//              selectedTextStyle: TextStyle(fontSize: 20.0, color: Colors.blueAccent),
-//            ),
-//            new Expanded(
-//                child: ListView(
-//                  children: <Widget>[
-//                    ProjectInfo(project: project),
-//                    OmzetKontrak(project: project),
-//                    TimProyek(project: project),
-//                    Progress(projectProgress: projectProgress),
-//                    PiutangRetensi(projectProgress: projectProgress),
-//                    PiutangUsaha(projectProgress: projectProgress),
-//                    Persediaan(projectProgress: projectProgress),
-//                    Qmsl(project: project, selectedDateTime: _selectedDateTime,),
-//                  ],
-//                )
-//            )
-//
-//          ],
-//        ));
   }
 
   _getProjectProgress() async {

@@ -32,6 +32,7 @@ class _ProjectPageState extends State<ProjectPage> {
 
   @override
   Widget build(BuildContext context) {
+    final projectContext = context;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -83,7 +84,7 @@ class _ProjectPageState extends State<ProjectPage> {
                         itemBuilder: (BuildContext context, int index) =>
                             Column(
                               children: <Widget>[
-                                ProjectItem(projectProgress: data[index], selectedDateTime: _selectedDateTime),
+                                ProjectItem(projectProgress: data[index], selectedDateTime: _selectedDateTime, projectContext: projectContext),
                                 Divider(height: 1.0, color: Colors.grey,),
                               ],
                             )

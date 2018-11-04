@@ -4,17 +4,17 @@ import 'package:dashboard/pages/project/ProjectDetailsPage.dart';
 
 class ProjectItem extends StatelessWidget {
   final ProjectProgress projectProgress;
-
+  final projectContext;
   final DateTime selectedDateTime;
-  ProjectItem({Key key, this.projectProgress, this.selectedDateTime}) : super(key: key);
+  ProjectItem({Key key, this.projectProgress, this.selectedDateTime, this.projectContext}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
         onTap: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => ProjectDetailsPage(
+            projectContext,
+            MaterialPageRoute(builder: (context) => ProjectDetailsPage(
                 selectedDateTime: selectedDateTime,
                 projectId: projectProgress.project.id
             )),
