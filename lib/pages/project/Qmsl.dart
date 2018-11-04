@@ -7,8 +7,9 @@ class Qmsl extends StatelessWidget {
   final Project project;
   final f = new DateFormat('dd/MM/yyyy');
   final DateTime selectedDateTime;
+  final detailsPageContext;
 
-  Qmsl({Key key, this.project, this.selectedDateTime}) : super(key: key);
+  Qmsl({Key key, this.project, this.selectedDateTime, this.detailsPageContext}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class Qmsl extends StatelessWidget {
             child: Text("QMSL", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
             onPressed: () {
               Navigator.push(
-                context,
+                detailsPageContext,
                 MaterialPageRoute(builder: (context) => SmwgPage(
                   title: "QMSL",
                   selectedDateTime: selectedDateTime,
@@ -35,7 +36,7 @@ class Qmsl extends StatelessWidget {
             child: Text("SHE Level", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
             onPressed: () {
               Navigator.push(
-                context,
+                detailsPageContext,
                 MaterialPageRoute(builder: (context) => SmwgPage(
                   title: "SHE Level",
                   selectedDateTime: selectedDateTime,
@@ -49,7 +50,7 @@ class Qmsl extends StatelessWidget {
             child: Text("5R", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold)),
             onPressed: () {
               Navigator.push(
-                context,
+                detailsPageContext,
                 MaterialPageRoute(builder: (context) => SmwgPage(
                   title: "5R",
                   selectedDateTime: selectedDateTime,

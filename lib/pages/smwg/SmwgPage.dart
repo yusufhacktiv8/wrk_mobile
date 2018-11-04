@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/models/SmwgItem.dart';
 import 'package:dashboard/pages/smwg/SmwgPageItem.dart';
-import 'package:month_picker_strip/month_picker_strip.dart';
+import 'package:dashboard/pages/dashboard/MonthSelector.dart';
 
 class SmwgPage extends StatefulWidget {
   final String title;
@@ -26,83 +26,129 @@ class _SmwgPageState extends State<SmwgPage> {
   void initState() {
     super.initState();
     _selectedDateTime = widget.selectedDateTime;
-    _getProjects();
+    _getSmwgs();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(appBar: new AppBar(
-      title: new Text(widget.title),
-      centerTitle: true,
-    ),
-    body: Column(
-      children: <Widget>[
-        Container(
-          child: Row (
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Expanded(
-                child: Material(
-                  color: Colors.amber,
-                  child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      child: Text("Uraian",
-                          style: TextStyle(color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 19.0))
-                  ),
-                ),),
-              Material(
-                color: Colors.blue,
-                child: Container(
-                  width: 75.0,
-                    padding: EdgeInsets.all(10.0),
-                    child: Text("Bobot",
-                        style: TextStyle(color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 19.0))
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          centerTitle: true,
+          leading: IconButton(
+            tooltip: 'Previous page',
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(20.0),
+            child: Column(
+              children: <Widget>[
+                MonthSelector(
+                  parentContext: context,
+                  textColor: Colors.white70,
+                  selectedDateTime: widget.selectedDateTime,
+                  onChange: (selectedDateTime) {
+                    this.setState(() {
+                      this._selectedDateTime = selectedDateTime;
+                    });
+                  },
                 ),
-              ),
-              Material(
-                color: Colors.teal,
-                child: Container(
-                    width: 75.0,
-                    padding: EdgeInsets.all(10.0),
-                    child: Center(
-                        child: Text("Nilai",
+              ],
+            ),
+          ),
+        ),
+        body: Column(
+          children: <Widget>[
+            Container(
+              child: Row (
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Expanded(
+                    child: Material(
+                      color: Colors.amber,
+                      child: Container(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text("Uraian",
+                              style: TextStyle(color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 19.0))
+                      ),
+                    ),),
+                  Material(
+                    color: Colors.blue,
+                    child: Container(
+                        width: 75.0,
+                        padding: EdgeInsets.all(10.0),
+                        child: Text("Bobot",
                             style: TextStyle(color: Colors.white,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 19.0))
-                    )
-                ),
+                    ),
+                  ),
+                  Material(
+                    color: Colors.teal,
+                    child: Container(
+                        width: 75.0,
+                        padding: EdgeInsets.all(10.0),
+                        child: Center(
+                            child: Text("Nilai",
+                                style: TextStyle(color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 19.0))
+                        )
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            new Expanded(
+              child: FutureBuilder(
+                  future: _getSmwgs(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    final data = snapshot.data;
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                        return Center(
+                          child: new CircularProgressIndicator(),
+                        );
+                      default:
+                        if (snapshot.hasError)
+                          return Center(
+                            child: new CircularProgressIndicator(),
+                          );
+                        else
+                        if (data.length > 0) {
+                          return ListView.builder(
+                            itemBuilder: (BuildContext context, int index) =>
+                                Column(
+                                  children: <Widget>[
+                                    SmwgPageItem(smwgItem: data[index]),
+                                    Divider(height: 1.0, color: Colors.grey,),
+                                  ],
+                                )
+                            ,
+                            itemCount: data.length,
+                          );
+                        } else {
+                          return Center(child: Text("No Data"),);
+                        }
+                    }
+                  })
+            ),
+          ],
         ),
-        new Expanded(
-          child: ListView.builder(
-            itemBuilder: (BuildContext context, int index) =>
-                Column(
-                  children: <Widget>[
-                    SmwgPageItem(smwgItem: smwgItems[index]),
-                    Divider(height: 1.0, color: Colors.grey,),
-                  ],
-                )
-            ,
-            itemCount: smwgItems.length,
-          )
-        )
-
-      ],
-    ));
+      ),
+    );
   }
 
-  _getProjects() async {
+  _getSmwgs() async {
     if (!mounted) return;
-
-    await this.getFromApi(_selectedDateTime.month, _selectedDateTime.year, widget.smwgType);
-    setState(() {
-    });
+    return await this.getFromApi(_selectedDateTime.month, _selectedDateTime.year, widget.smwgType);
   }
 
   Future<void> getFromApi(int month, int year, int smwgType) async{
@@ -113,14 +159,13 @@ class _SmwgPageState extends State<SmwgPage> {
       var response = await request.close();
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
-        this.smwgItems = SmwgItem.fromJsonArray(json);
+        return SmwgItem.fromJsonArray(json);
       }
       else{
-        this.smwgItems = [];
+        return [];
       }
     } catch (exception) {
-      this.smwgItems = [];
+      return [];
     }
   }
-
 }

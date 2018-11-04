@@ -42,6 +42,7 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final detailsPageContext = context;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -104,7 +105,7 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
               Padding(
                 padding: EdgeInsets.all(4.0),
               ),
-              Qmsl(project: project, selectedDateTime: _selectedDateTime,),
+              Qmsl(project: project, selectedDateTime: _selectedDateTime, detailsPageContext: detailsPageContext),
             ],
           ),
         ),
