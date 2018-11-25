@@ -11,7 +11,10 @@ import 'package:dashboard/pages/dashboard/NetProfitTile.dart';
 import 'package:dashboard/pages/dashboard/ProjectCountTile.dart';
 import 'package:dashboard/pages/hasilusaha/HasilUsahaPage.dart';
 import 'package:dashboard/pages/project/ProjectPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dashboard/Constant.dart';
 
+Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 class Dashboard extends StatefulWidget {
   @override
@@ -327,5 +330,11 @@ class _DashboardState extends State<Dashboard> {
                     print('Not set yet');
                   },
             child: child));
+  }
+
+  Future<String> _getMobileToken() async {
+    final SharedPreferences prefs = await _prefs;
+
+    return prefs.getString(MOBILE_TOKEN_KEY) ?? '';
   }
 }

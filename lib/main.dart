@@ -5,6 +5,7 @@ import 'package:dashboard/security/Login.dart';
 //import 'package:dashboard/Dashboard.dart';
 import 'package:dashboard/pages/dashboard/Dashboard.dart';
 import 'package:dashboard/pages/project/ProjectPage.dart';
+import 'package:dashboard/pages/login/LoginScreen.dart';
 
 void main() => runApp(new MyApp());
 
@@ -25,11 +26,11 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-//      home: new Dashboard(),
-      routes: {
-        '/': (context) => Dashboard(),
-        '/projects': (context) => ProjectPage(),
-      },
+      home: new LoginScreen(),
+//      routes: {
+//        '/': (context) => Dashboard(),
+//        '/projects': (context) => ProjectPage(),
+//      },
     );
   }
 }

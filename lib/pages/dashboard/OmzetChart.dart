@@ -7,6 +7,10 @@ import 'package:dashboard/events.dart';
 import 'package:dashboard/models/ChartData.dart';
 import 'package:dashboard/Constant.dart';
 import 'package:dashboard/components/charts/LineChart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dashboard/Constant.dart';
+
+Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 class OmzetChart extends StatefulWidget {
   final String chartType;
@@ -62,19 +66,61 @@ class _OmzetChartState extends State<OmzetChart> {
     final chartType = widget.chartType;
     String planField = chartType == 'creditsbyyear' ?'pu' : 'plan';
     String actualField = chartType == 'creditsbyyear' ?'tb' : 'actual';
+    String token = await _getMobileToken();
+    var _context = context;
+    List<ChartData> emptyResult = [];
     try {
       var httpClient = new HttpClient();
       var request =
           await httpClient.getUrl(Uri.parse('$URL/$chartType?year=$year'));
+      request.headers.set('Authorization', 'Bearer $token');
       var response = await request.close();
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         return ChartData.fromJsonArray(json, planField, actualField);
-      } else {
-        return [];
+      } else if (response.statusCode == HttpStatus.forbidden) {
+//        _showDialog("Session Expired", "Please login", _context);
+        Scaffold.of(context).showSnackBar(new SnackBar(
+          content: new Text('Session Expired'),
+        ));
+        return emptyResult;
+      }else {
+        return emptyResult;
       }
     } catch (exception) {
-      return [];
+      Scaffold.of(context).showSnackBar(new SnackBar(
+        content: new Text('Connection Error'),
+      ));
+      return emptyResult;
     }
+  }
+
+  Future<String> _getMobileToken() async {
+    final SharedPreferences prefs = await _prefs;
+
+    return prefs.getString(MOBILE_TOKEN_KEY) ?? '';
+  }
+
+  void _showDialog(String title, String description, _context) {
+    // flutter defined function
+    showDialog(
+      context: _context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(description),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
