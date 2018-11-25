@@ -144,7 +144,7 @@ class LoginScreenState extends State<LoginScreen>
         var dataString = await response.transform(utf8.decoder).join();
         var data = json.decode(dataString);
         var token = data["token"];
-        await _setMobileToken('');
+        await _setMobileToken(token);
         setState(() {
           animationStatus = 1;
         });
