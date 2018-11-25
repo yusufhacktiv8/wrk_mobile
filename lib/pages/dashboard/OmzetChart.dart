@@ -83,7 +83,7 @@ class _OmzetChartState extends State<OmzetChart> {
           content: new Text('Session Expired'),
         ));
         return emptyResult;
-      }else {
+      } else {
         return emptyResult;
       }
     } catch (exception) {

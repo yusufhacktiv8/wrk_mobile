@@ -15,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:dashboard/Constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'components/FormValue.dart';
 
 Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -28,6 +29,10 @@ class LoginScreenState extends State<LoginScreen>
     with TickerProviderStateMixin {
   AnimationController _loginButtonController;
   var animationStatus = 0;
+
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final LoginFormValue _formValue = new LoginFormValue();
+
   @override
   void initState() {
     super.initState();
@@ -106,7 +111,7 @@ class LoginScreenState extends State<LoginScreen>
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               new Tick(image: tick),
-                              new FormContainer(),
+                              new FormContainer(formKey: _formKey, formValue: _formValue),
                               new SignUp()
                             ],
                           ),
@@ -134,13 +139,16 @@ class LoginScreenState extends State<LoginScreen>
   }
 
   Future<void> login() async{
+    _formKey.currentState.save();
+    var username = _formValue.username;
+    var password = _formValue.password;
     try {
       var httpClient = new HttpClient();
       var request = await httpClient.postUrl(Uri.parse('$URL/security/signin'));
       request.headers.set('content-type', 'application/json');
       Map map = {
-        'username': 'yusuf',
-        'password': 'Admin12#',
+        'username': username,
+        'password': password,
       };
       request.add(utf8.encode(json.encode(map)));
       var response = await request.close();
@@ -153,12 +161,14 @@ class LoginScreenState extends State<LoginScreen>
           animationStatus = 1;
         });
         _playAnimation();
-      }
-      else{
-        await _setMobileToken('');
+        _formKey.currentState.reset();
+      } else if (response.statusCode == HttpStatus.forbidden) {
+        _showDialog("Invalid Credentials");
+      } else {
+        _showDialog("Connection Error");
       }
     } catch (exception) {
-      await _setMobileToken('');
+      _showDialog("Connection Error");
     }
   }
 
@@ -166,6 +176,29 @@ class LoginScreenState extends State<LoginScreen>
     final SharedPreferences prefs = await _prefs;
 
     return prefs.setString(MOBILE_TOKEN_KEY, token);
+  }
+
+  void _showDialog(String message) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Login Error"),
+          content: new Text(message),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
 }

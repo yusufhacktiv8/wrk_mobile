@@ -4,7 +4,8 @@ class InputFieldArea extends StatelessWidget {
   final String hint;
   final bool obscure;
   final IconData icon;
-  InputFieldArea({this.hint, this.obscure, this.icon});
+  final onSaved;
+  InputFieldArea({this.hint, this.obscure, this.icon, this.onSaved});
   @override
   Widget build(BuildContext context) {
     return (new Container(
@@ -17,6 +18,7 @@ class InputFieldArea extends StatelessWidget {
         ),
       ),
       child: new TextFormField(
+        onSaved: onSaved,
         obscureText: obscure,
         style: const TextStyle(
           color: Colors.white,
