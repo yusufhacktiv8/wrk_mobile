@@ -57,15 +57,14 @@ class LoginScreenState extends State<LoginScreen>
     return showDialog(
       context: context,
       child: new AlertDialog(
-        title: new Text('Are you sure?'),
+        title: new Text('Are you sure want to close application?'),
         actions: <Widget>[
           new FlatButton(
             onPressed: () => Navigator.of(context).pop(false),
             child: new Text('No'),
           ),
           new FlatButton(
-            onPressed: () =>
-                Navigator.pushReplacementNamed(context, "/home"),
+            onPressed: () => exit(0),
             child: new Text('Yes'),
           ),
         ],
