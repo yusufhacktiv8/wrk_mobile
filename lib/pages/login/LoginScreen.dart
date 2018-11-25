@@ -46,6 +46,11 @@ class LoginScreenState extends State<LoginScreen>
       await _loginButtonController.forward();
       await _loginButtonController.reverse();
     } on TickerCanceled {}
+
+    setState(() {
+      animationStatus = 0;
+    });
+
   }
 
   Future<bool> _onWillPop() {
