@@ -41,7 +41,7 @@ class _DashboardState extends State<Dashboard> {
     'Piutang'
   ];
   static final List<Choice> choices = const <Choice>[
-    const Choice(title: 'Change Password', icon: Icons.directions_bike),
+//    const Choice(title: 'Change Password', icon: Icons.directions_bike),
     const Choice(title: 'Logout', icon: Icons.directions_car),
   ];
   String actualDropdown = chartDropdownItems[0];

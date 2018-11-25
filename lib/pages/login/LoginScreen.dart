@@ -110,7 +110,10 @@ class LoginScreenState extends State<LoginScreen>
                           new Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              new Tick(image: tick),
+//                              new Tick(image: tick),
+                              Padding(padding: const EdgeInsets.only(bottom: 100.0),),
+                              Image.asset('assets/wrk_logo_150_shadows.png', scale: 2.0, width: 100.0, height: 100.0),
+                              Padding(padding: const EdgeInsets.only(bottom: 30.0),),
                               new FormContainer(formKey: _formKey, formValue: _formValue),
                               new SignUp()
                             ],
