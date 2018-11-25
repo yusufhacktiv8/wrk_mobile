@@ -67,7 +67,6 @@ class _OmzetChartState extends State<OmzetChart> {
     String planField = chartType == 'creditsbyyear' ?'pu' : 'plan';
     String actualField = chartType == 'creditsbyyear' ?'tb' : 'actual';
     String token = await _getMobileToken();
-    var _context = context;
     List<ChartData> emptyResult = [];
     try {
       var httpClient = new HttpClient();
@@ -99,28 +98,5 @@ class _OmzetChartState extends State<OmzetChart> {
     final SharedPreferences prefs = await _prefs;
 
     return prefs.getString(MOBILE_TOKEN_KEY) ?? '';
-  }
-
-  void _showDialog(String title, String description, _context) {
-    // flutter defined function
-    showDialog(
-      context: _context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text(title),
-          content: new Text(description),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 }

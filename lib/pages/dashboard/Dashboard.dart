@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:month_picker_strip/month_picker_strip.dart';
 import 'package:dashboard/events.dart';
@@ -92,11 +93,24 @@ class _DashboardState extends State<Dashboard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text('yusuf',
-                      style: TextStyle(
+                  FutureBuilder (
+                      future: _getUserName(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data,
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14.0));
+                        } else {
+                          return Text('-',
+                          style: TextStyle(
                           color: Colors.blue,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14.0)),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14.0));
+                        }
+                      }
+                  ),
                   Icon(Icons.arrow_drop_down, color: Colors.black54)
                 ],
               ),
@@ -332,9 +346,49 @@ class _DashboardState extends State<Dashboard> {
             child: child));
   }
 
+  Future<String> _getUserName() async {
+    String token = await _getMobileToken();
+    var jwt = parseJwt(token);
+    return jwt["name"];
+  }
+
   Future<String> _getMobileToken() async {
     final SharedPreferences prefs = await _prefs;
 
     return prefs.getString(MOBILE_TOKEN_KEY) ?? '';
+  }
+
+  Map<String, dynamic> parseJwt(String token) {
+    final parts = token.split('.');
+    if (parts.length != 3) {
+      throw Exception('invalid token');
+    }
+
+    final payload = _decodeBase64(parts[1]);
+    final payloadMap = json.decode(payload);
+    if (payloadMap is! Map<String, dynamic>) {
+      throw Exception('invalid payload');
+    }
+
+    return payloadMap;
+  }
+
+  String _decodeBase64(String str) {
+    String output = str.replaceAll('-', '+').replaceAll('_', '/');
+
+    switch (output.length % 4) {
+      case 0:
+        break;
+      case 2:
+        output += '==';
+        break;
+      case 3:
+        output += '=';
+        break;
+      default:
+        throw Exception('Illegal base64url string!"');
+    }
+
+    return utf8.decode(base64Url.decode(output));
   }
 }
