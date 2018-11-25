@@ -12,6 +12,7 @@ import 'package:dashboard/pages/dashboard/NetProfitTile.dart';
 import 'package:dashboard/pages/dashboard/ProjectCountTile.dart';
 import 'package:dashboard/pages/hasilusaha/HasilUsahaPage.dart';
 import 'package:dashboard/pages/project/ProjectPage.dart';
+import 'package:dashboard/pages/login/LoginScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dashboard/Constant.dart';
 
@@ -39,6 +40,10 @@ class _DashboardState extends State<Dashboard> {
     'Sales',
     'Piutang'
   ];
+  static final List<Choice> choices = const <Choice>[
+    const Choice(title: 'Change Password', icon: Icons.directions_bike),
+    const Choice(title: 'Logout', icon: Icons.directions_car),
+  ];
   String actualDropdown = chartDropdownItems[0];
   int actualChart = 0;
   DateTime _selectedDateTime;
@@ -57,6 +62,21 @@ class _DashboardState extends State<Dashboard> {
         eventBus.fire(YearChangedEvent(_selectedDateTime));
       });
     });
+  }
+
+  void _select(Choice choice) {
+    // Causes the app to rebuild with the new _selectedChoice.
+    _setMobileToken('');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
+  }
+
+  Future<bool> _setMobileToken(String token) async {
+    final SharedPreferences prefs = await _prefs;
+
+    return prefs.setString(MOBILE_TOKEN_KEY, token);
   }
 
   @override
@@ -87,34 +107,45 @@ class _DashboardState extends State<Dashboard> {
                   fontWeight: FontWeight.w700,
                   fontSize: 30.0)),
           actions: <Widget>[
-            Container(
-              margin: EdgeInsets.only(right: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  FutureBuilder (
-                      future: _getUserName(),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(snapshot.data,
-                              style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14.0));
-                        } else {
-                          return Text('-',
-                          style: TextStyle(
-                          color: Colors.blue,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14.0));
+            PopupMenuButton<Choice>(
+              onSelected: _select,
+              child: Container(
+                margin: EdgeInsets.only(right: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    FutureBuilder (
+                        future: _getUserName(),
+                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(snapshot.data,
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0));
+                          } else {
+                            return Text('-',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0));
+                          }
                         }
-                      }
-                  ),
-                  Icon(Icons.arrow_drop_down, color: Colors.black54)
-                ],
+                    ),
+                    Icon(Icons.arrow_drop_down, color: Colors.black54)
+                  ],
+                ),
               ),
-            )
+              itemBuilder: (BuildContext context) {
+                return choices.map((Choice choice) {
+                  return PopupMenuItem<Choice>(
+                    value: choice,
+                    child: Text(choice.title),
+                  );
+                }).toList();
+              },
+            ),
           ],
         ),
         body: Column(
@@ -392,3 +423,11 @@ class _DashboardState extends State<Dashboard> {
     return utf8.decode(base64Url.decode(output));
   }
 }
+
+class Choice {
+  const Choice({this.title, this.icon});
+
+  final String title;
+  final IconData icon;
+}
+
