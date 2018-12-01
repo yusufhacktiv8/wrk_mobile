@@ -6,6 +6,7 @@ class SmwgItem {
   String name;
   double bobot;
   double nilai;
+  int itemType;
 
   SmwgItem({
     this.id,
@@ -13,6 +14,7 @@ class SmwgItem {
     this.name,
     this.bobot,
     this.nilai,
+    this.itemType,
   });
 
   static SmwgItem fromData(Map<String, dynamic> data){
@@ -22,6 +24,7 @@ class SmwgItem {
       name: data["name"],
       bobot: data["bobot"] != null ? (data["bobot"] as num).toDouble() : 0.0,
       nilai: data["nilai"] != null ? (data["nilai"] as num).toDouble() : 0.0,
+      itemType: data["itemType"],
     );
     return result;
   }
