@@ -36,9 +36,21 @@ class SmwgItem {
 
   static List<SmwgItem> fromJsonArray(String jsonArrayString){
     List data = json.decode(jsonArrayString);
+    double subTotalBobot = 0.0;
+    double subTotalNilai = 0.0;
     List<SmwgItem> result = [];
     for(var i=0; i<data.length; i++){
-      result.add(fromData(data[i]));
+      SmwgItem item = fromData(data[i]);
+      if (item.itemType == 3) {
+        item.bobot = subTotalBobot;
+        item.nilai = subTotalNilai;
+        subTotalBobot = 0.0;
+        subTotalNilai = 0.0;
+      } else if (item.itemType == 1) {
+        subTotalBobot += item.bobot;
+        subTotalNilai += item.nilai;
+      }
+      result.add(item);
     }
     return result;
   }

@@ -36,21 +36,46 @@ class SmwgPageItem extends StatelessWidget {
               ),
             ],
           ));
-    }
-
-    return Container(
-        padding: EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                color: Colors.blueAccent,
-                padding: EdgeInsets.all(10.0),
-                child: Text(smwgItem.name, style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.w700, color: Colors.white),),
+    } else if (smwgItem.itemType == 2) {
+      return Container(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  color: Colors.blueAccent,
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(smwgItem.name, style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.w700, color: Colors.white),),
+                ),
               ),
-            ),
-          ],
-        ));
+            ],
+          ));
+    } else {
+      return Container(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  color: Colors.grey,
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(smwgItem.name, style: TextStyle(fontSize: 18.0),),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10.0),
+                width: 75.0,
+                child: Text(bobotText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700), textAlign: TextAlign.end,),
+              ),
+              Container(
+                padding: EdgeInsets.all(10.0),
+                width: 75.0,
+                child: Text(nilaiText, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700), textAlign: TextAlign.end,),
+              ),
+            ],
+          ));
+    }
   }
 }
