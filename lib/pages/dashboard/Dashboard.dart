@@ -12,6 +12,7 @@ import 'package:dashboard/pages/dashboard/NetProfitTile.dart';
 import 'package:dashboard/pages/dashboard/ProjectCountTile.dart';
 import 'package:dashboard/pages/hasilusaha/HasilUsahaPage.dart';
 import 'package:dashboard/pages/project/ProjectPage.dart';
+import 'package:dashboard/pages/profile/ProfilePage.dart';
 import 'package:dashboard/pages/login/LoginScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dashboard/Constant.dart';
@@ -41,7 +42,7 @@ class _DashboardState extends State<Dashboard> {
     'Piutang'
   ];
   static final List<Choice> choices = const <Choice>[
-//    const Choice(title: 'Change Password', icon: Icons.directions_bike),
+    const Choice(title: 'Change Password', icon: Icons.directions_bike),
     const Choice(title: 'Logout', icon: Icons.directions_car),
   ];
   String actualDropdown = chartDropdownItems[0];
@@ -64,13 +65,21 @@ class _DashboardState extends State<Dashboard> {
     });
   }
 
-  void _select(Choice choice) {
+  void _select(final Choice choice) {
     // Causes the app to rebuild with the new _selectedChoice.
-    _setMobileToken('');
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
+    if (choice.title == 'Logout') {
+      _setMobileToken('');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    } else if (choice.title == 'Change Password') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProfilePage()),
+      );
+    }
+
   }
 
   Future<bool> _setMobileToken(String token) async {
