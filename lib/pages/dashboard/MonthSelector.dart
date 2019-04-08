@@ -20,7 +20,19 @@ class _MonthSelectorState extends State<MonthSelector> {
 
   DateTime selectedDateTime;
 
-  final pickerData = '''
+  String _getYears() {
+    DateTime now = new DateTime.now();
+    int year = now.year;
+    List years = [];
+    for(int i=year; i > year - 5; i--) {
+      years.add("$i");
+    }
+
+    return years.join(",");
+  }
+
+  String _getPickerData() {
+    return '''
   [
     [
       "January",
@@ -37,12 +49,13 @@ class _MonthSelectorState extends State<MonthSelector> {
       "December"
     ],
     [
-      2016,
-      2017,
-      2018
+      ${_getYears()}
     ]
   ]
   ''';
+  }
+
+//  var pickerData =
 
   int _getMonthFormString(String month) {
     switch(month) {
@@ -105,7 +118,7 @@ class _MonthSelectorState extends State<MonthSelector> {
           onPressed: () {
             new Picker(
               selecteds: selecteds,
-                adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(pickerData), isArray: true),
+                adapter: PickerDataAdapter<String>(pickerdata: new JsonDecoder().convert(_getPickerData()), isArray: true),
                 hideHeader: true,
                 title: new Text("Select Month"),
                 onConfirm: (Picker picker, List value) {
